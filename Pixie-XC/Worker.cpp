@@ -11,12 +11,12 @@
 #include "Queue.h"
 #include "Worker.h"
 #include "Statistics.h"
-//#include "Message.h"
-//#include "MsgSocket.h"
-#include "SocketHandler.hpp"
+#include "Protocol.h"
+#include "Handler.hpp"
 
-Worker::Worker(Queue& _queue, int _id): queue(_queue)
+Worker::Worker(Protocol _protocol, Queue& _queue, int _id): queue(_queue)
 {
+    protocol = _protocol;
     active_socket = 0;
     active  = false;
     id = _id;
@@ -35,7 +35,7 @@ void Worker::main()
         active_socket = (int) mySocketHandle;
         try
         {
-            SocketHandler handler{mySocketHandle, id};
+            Handler handler{Protocol::LOOPBACK, mySocketHandle, id};
             handler.handle();
         }
         catch (std::exception e)

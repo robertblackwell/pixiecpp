@@ -10,9 +10,8 @@
 #include <cstdlib>
 #include <pthread.h>
 #include <string>
+#include "Protocol.h"
 #include "Exception.hpp"
-#include "socket_functions.hpp"
-#include "SocketHandler.hpp"
 
 #include "Logger.h"
 INITIALIZE_EASYLOGGINGPP
@@ -33,7 +32,7 @@ int main(int argc, const char * argv[])
     
     try
     {
-        Server server{20};
+        Server server{Protocol::LOOPBACK, 20};
         server.listen(8001);
     }
     catch(Exception e)

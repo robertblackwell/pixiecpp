@@ -21,7 +21,7 @@ public:
     {
         socket = sock;
     }
-    bool readMessage(BlkMessage& msg, int* status);
+    bool readMessage(BlkMessage& msg, int& status);
     bool writeMessage(BlkMessage& msg, int& status);
     void flush();
     void close();

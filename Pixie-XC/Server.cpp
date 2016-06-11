@@ -13,7 +13,7 @@
 #include <array>
 
 #include "Logger.h"
-
+#include "Protocol.h"
 #include "Queue.h"
 #include "Worker.h"
 #include "WorkerLoop.h"
@@ -21,8 +21,9 @@
 #include "Monitor.h"
 #include "Server.h"
 
-Server::Server( unsigned _nbr_workers)
+Server::Server(Protocol _protocol, unsigned _nbr_workers)
 {
+    protocol = _protocol;
     nbr_workers = _nbr_workers;
 }
 
@@ -52,7 +53,7 @@ void Server::listen(int _port)
     //
     for(int i = 0; i < nbr_workers; i++)
     {
-        WorkerSharedPtr w_sp(new Worker(queue, i));
+        WorkerSharedPtr w_sp(new Worker(protocol, queue, i));
         worker_v.push_back(w_sp);
         
         rc = w_sp->start();

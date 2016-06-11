@@ -21,7 +21,7 @@
  *  BLK_READ_STATUS_PARSE_ERROR -   the data was not parsed successfully
  *  BLK_READ_STATUS_IOERROR     -   got an io error on the socket
  */
-bool BlkSocket::readMessage(BlkMessage& msg, int* status)
+bool BlkSocket::readMessage(BlkMessage& msg, int& status)
 {
     int buffer_length = 10000;
     char buffer[buffer_length];
@@ -35,15 +35,15 @@ bool BlkSocket::readMessage(BlkMessage& msg, int* status)
         std::string buffer_as_string(buffer, n);
         
         if( sockStatus == SOCKET_STATUS_GOOD){
-            *status = BLK_READ_STATUS_OK;
+            status = BLK_READ_STATUS_OK;
             //
             // NOTE - do not return
             //
         }else if(sockStatus == SOCKET_STATUS_EOF){
-            *status = BLK_READ_STATUS_EOF;
+            status = BLK_READ_STATUS_EOF;
             return false;
         }else if(sockStatus == SOCKET_STATUS_ERROR){
-            *status = BLK_READ_STATUS_IOERROR;
+            status = BLK_READ_STATUS_IOERROR;
             return false;
         }else{
             assert(false);
@@ -53,7 +53,7 @@ bool BlkSocket::readMessage(BlkMessage& msg, int* status)
             return true;
         }
         if( parser.parseError ){
-            *status = BLK_READ_STATUS_PARSE_ERROR;
+            status = BLK_READ_STATUS_PARSE_ERROR;
             return false;
         }
     }
