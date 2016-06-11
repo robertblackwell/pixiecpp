@@ -1,4 +1,4 @@
-#include "Message.h"
+#include "BlkMessage.h"
 #ifndef MSG_SOCKET_INC
 #define MSG_SOCKET_INC 1
 
@@ -12,17 +12,17 @@
 #define  BLK_WRITE_STATUS_IOERROR       6 //-   got an io error on the socket
 
 
-class MsgSocket
+class BlkSocket
 {
 public:
     
     socket_handle_t socket;
-    MsgSocket(socket_handle_t sock)
+    BlkSocket(socket_handle_t sock)
     {
         socket = sock;
     }
-    bool readMessage(Message& msg, int* status);
-    bool writeMessage(Message& msg, int& status);
+    bool readMessage(BlkMessage& msg, int* status);
+    bool writeMessage(BlkMessage& msg, int& status);
     void flush();
     void close();
 };

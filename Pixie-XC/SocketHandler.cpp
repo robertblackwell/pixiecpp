@@ -8,7 +8,7 @@
 #include "Logger.h"
 #include "socket_functions.hpp"
 #include "SocketHandler.hpp"
-#include "MsgSocket.h"
+#include "BlkSocket.h"
 
 SocketHandler::SocketHandler(socket_handle_t socketHandle, int _id)
 {
@@ -17,7 +17,7 @@ SocketHandler::SocketHandler(socket_handle_t socketHandle, int _id)
 }
 void SocketHandler::handle()
 {
-    MsgSocket myMessageSocket(socket_fd);
+    BlkSocket myMessageSocket(socket_fd);
 
     int count = 0;
     LOG(DEBUG) << "SocketHandler id : " << id <<  " socket : " << socket_fd << std::endl;
@@ -31,7 +31,7 @@ void SocketHandler::handle()
         << " count : "
         << count
         << std::endl;
-        Message msg;
+        BlkMessage msg;
         int status;
 
         bool gotMessage = myMessageSocket.readMessage(msg, &status);

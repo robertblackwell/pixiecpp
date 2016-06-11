@@ -11,8 +11,7 @@
 		D41D45FF1C380C5100C2D339 /* socket_functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D41D45FD1C380C5100C2D339 /* socket_functions.cpp */; };
 		D41D46021C387A9E00C2D339 /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D41D46001C387A9E00C2D339 /* Exception.cpp */; };
 		D42631A81C3FFFC900727699 /* WorkerLoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42631A61C3FFFC900727699 /* WorkerLoop.cpp */; };
-		D42631AB1C400C9800727699 /* MsgSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42631A91C400C9800727699 /* MsgSocket.cpp */; };
-		D42631AE1C400D2600727699 /* Message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42631AC1C400D2600727699 /* Message.cpp */; };
+		D42631AB1C400C9800727699 /* BlkSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42631A91C400C9800727699 /* BlkSocket.cpp */; };
 		D42631B11C400F5D00727699 /* Statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42631AF1C400F5D00727699 /* Statistics.cpp */; };
 		D42631B41C4011E600727699 /* SocketHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42631B21C4011E600727699 /* SocketHandler.cpp */; };
 		D437DE711C3045D50090E443 /* Queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D437DE701C3045D50090E443 /* Queue.cpp */; };
@@ -21,6 +20,7 @@
 		D437DE7A1C304D0E0090E443 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D437DE791C304D0E0090E443 /* main.cpp */; };
 		D437DE811C3075070090E443 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D437DE7F1C3075070090E443 /* Thread.cpp */; };
 		D437DE841C3087230090E443 /* Monitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D437DE821C3087230090E443 /* Monitor.cpp */; };
+		D44BBFB31D0CA45600E4871C /* BlkMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D44BBFB11D0CA45600E4871C /* BlkMessage.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,10 +44,8 @@
 		D41D46011C387A9E00C2D339 /* Exception.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Exception.hpp; sourceTree = "<group>"; };
 		D42631A61C3FFFC900727699 /* WorkerLoop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorkerLoop.cpp; sourceTree = "<group>"; };
 		D42631A71C3FFFC900727699 /* WorkerLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkerLoop.h; sourceTree = "<group>"; };
-		D42631A91C400C9800727699 /* MsgSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MsgSocket.cpp; sourceTree = "<group>"; };
-		D42631AA1C400C9800727699 /* MsgSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgSocket.h; sourceTree = "<group>"; };
-		D42631AC1C400D2600727699 /* Message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Message.cpp; sourceTree = "<group>"; };
-		D42631AD1C400D2600727699 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		D42631A91C400C9800727699 /* BlkSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BlkSocket.cpp; sourceTree = "<group>"; };
+		D42631AA1C400C9800727699 /* BlkSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlkSocket.h; sourceTree = "<group>"; };
 		D42631AF1C400F5D00727699 /* Statistics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Statistics.cpp; sourceTree = "<group>"; };
 		D42631B01C400F5D00727699 /* Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statistics.h; sourceTree = "<group>"; };
 		D42631B21C4011E600727699 /* SocketHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketHandler.cpp; sourceTree = "<group>"; };
@@ -65,6 +63,8 @@
 		D437DE801C3075070090E443 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
 		D437DE821C3087230090E443 /* Monitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Monitor.cpp; sourceTree = "<group>"; };
 		D437DE831C3087230090E443 /* Monitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monitor.h; sourceTree = "<group>"; };
+		D44BBFB11D0CA45600E4871C /* BlkMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BlkMessage.cpp; sourceTree = "<group>"; };
+		D44BBFB21D0CA45600E4871C /* BlkMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlkMessage.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,10 +113,10 @@
 				D42631B21C4011E600727699 /* SocketHandler.cpp */,
 				D42631B01C400F5D00727699 /* Statistics.h */,
 				D42631AF1C400F5D00727699 /* Statistics.cpp */,
-				D42631AA1C400C9800727699 /* MsgSocket.h */,
-				D42631A91C400C9800727699 /* MsgSocket.cpp */,
-				D42631AD1C400D2600727699 /* Message.h */,
-				D42631AC1C400D2600727699 /* Message.cpp */,
+				D42631AA1C400C9800727699 /* BlkSocket.h */,
+				D42631A91C400C9800727699 /* BlkSocket.cpp */,
+				D44BBFB11D0CA45600E4871C /* BlkMessage.cpp */,
+				D44BBFB21D0CA45600E4871C /* BlkMessage.h */,
 				D42631A71C3FFFC900727699 /* WorkerLoop.h */,
 				D42631A61C3FFFC900727699 /* WorkerLoop.cpp */,
 				D437DE741C3047590090E443 /* Listener.h */,
@@ -186,7 +186,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D437DE781C304A800090E443 /* Worker.cpp in Sources */,
-				D42631AE1C400D2600727699 /* Message.cpp in Sources */,
 				D437DE841C3087230090E443 /* Monitor.cpp in Sources */,
 				D41D45F61C35DF3B00C2D339 /* Server.cpp in Sources */,
 				D437DE751C3047590090E443 /* Listener.cpp in Sources */,
@@ -195,8 +194,9 @@
 				D42631B41C4011E600727699 /* SocketHandler.cpp in Sources */,
 				D42631B11C400F5D00727699 /* Statistics.cpp in Sources */,
 				D437DE7A1C304D0E0090E443 /* main.cpp in Sources */,
-				D42631AB1C400C9800727699 /* MsgSocket.cpp in Sources */,
+				D42631AB1C400C9800727699 /* BlkSocket.cpp in Sources */,
 				D437DE711C3045D50090E443 /* Queue.cpp in Sources */,
+				D44BBFB31D0CA45600E4871C /* BlkMessage.cpp in Sources */,
 				D41D45FF1C380C5100C2D339 /* socket_functions.cpp in Sources */,
 				D437DE811C3075070090E443 /* Thread.cpp in Sources */,
 			);

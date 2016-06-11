@@ -7,8 +7,8 @@
 
 #include "Logger.h"
 #include "socket_functions.hpp"
-#include "Message.h"
-#include "MsgSocket.h"
+#include "BlkMessage.h"
+#include "BlkSocket.h"
 
 
 /**
@@ -21,12 +21,12 @@
  *  BLK_READ_STATUS_PARSE_ERROR -   the data was not parsed successfully
  *  BLK_READ_STATUS_IOERROR     -   got an io error on the socket
  */
-bool MsgSocket::readMessage(Message& msg, int* status)
+bool BlkSocket::readMessage(BlkMessage& msg, int* status)
 {
     int buffer_length = 10000;
     char buffer[buffer_length];
     
-    Parser parser(msg);
+    BlkParser parser(msg);
     int sockStatus;
     
     for(;;){
@@ -60,10 +60,14 @@ bool MsgSocket::readMessage(Message& msg, int* status)
     return true;
 }
 
-bool MsgSocket::writeMessage(Message& msg, int& status)
+bool BlkSocket::writeMessage(BlkMessage& msg, int& status)
 {
     std::string rawMessage("");
     rawMessage += msg.firstLine;
+    rawMessage += "\n";
+    rawMessage += std::to_string(msg.destination_port);
+    rawMessage += "\n";
+    rawMessage += msg.request_verb;
     rawMessage += "\n";
     rawMessage += std::to_string(msg.messageLength);
     rawMessage += "\n";
@@ -75,11 +79,11 @@ bool MsgSocket::writeMessage(Message& msg, int& status)
     
     return true;
 }
-void MsgSocket::flush()
+void BlkSocket::flush()
 {
     socket_wait_for_write_flush(socket);
 }
-void MsgSocket::close()
+void BlkSocket::close()
 {
     socket_close(socket);
 }
