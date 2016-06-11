@@ -11,6 +11,11 @@
 #include "BlkSocket.h"
 
 
+BlkSocket::BlkSocket()
+{
+    
+}
+
 /**
  * Reads data from a socket and parses the incoming data into a BLKMessage
  *

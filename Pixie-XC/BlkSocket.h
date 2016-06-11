@@ -17,6 +17,7 @@ class BlkSocket
 public:
     
     socket_handle_t socket;
+    BlkSocket();
     BlkSocket(socket_handle_t sock)
     {
         socket = sock;
