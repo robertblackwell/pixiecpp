@@ -30,8 +30,7 @@ void socket_throw_error(socket_handle_t socket, int errorno, std::string message
     const char* m = message.c_str();
     int eno = (int) errorno;
     int socket_fd = (int) socket;
-    printf(" SocketError[%s ], errno:%d (%s)  socket_fd: %d", m, eno, strerror(errorno), socket_fd );
-    asprintf(&msg, " SocketError[%s ], errno:%d  socket_fd: %d", m, eno, socket_fd );
+    fprintf(stderr, " SocketError[%s ], errno:%d (%s)  socket_fd: %d", m, eno, strerror(errorno), socket_fd );
     
     //throw std::runtime_error(msg);
 }
@@ -67,7 +66,8 @@ socket_handle_t socket_create_listener_on_port(int port)
     sin.sin_len = sizeof(sin);
     sin.sin_family = AF_INET; // or AF_INET6 (address family)
     sin.sin_port = htons(port);
-    sin.sin_addr.s_addr= INADDR_ANY;
+//    sin.sin_addr.s_addr= INADDR_ANY;
+    sin.sin_addr.s_addr = inet_addr("127.0.0.1");
     int result;
     int yes = 1;
     if( (result = setsockopt(tmp_socket, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes))) != 0 )
@@ -93,7 +93,7 @@ socket_handle_t socket_create_listener_on_port(int port)
 //
 // Uses conditional compilation to include/exclude code to handle ipv6
 //
-socket_handle_t socket_connect_host_port( char* hostname, unsigned short port )
+socket_handle_t socket_connect_host_port( char* hostname, unsigned short port, int* status )
 {
 #ifdef USE_IPV6
     struct addrinfo hints;
@@ -119,9 +119,11 @@ socket_handle_t socket_connect_host_port( char* hostname, unsigned short port )
     hints.ai_family = PF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
     (void) snprintf( portstr, sizeof(portstr), "%d", (int) port );
-    if ( (gaierr = getaddrinfo( hostname, portstr, &hints, &ai )) != 0 )
+    if ( (gaierr = getaddrinfo( hostname, portstr, &hints, &ai )) != 0 ){
         socket_send_error( 404, "Not Found", (char*) 0, "Unknown host." );
-    
+        *status = errno;
+        return 0;
+    }
     /* Find the first IPv4 and IPv6 entries. */
     aiv4 = (struct addrinfo*) 0;
     aiv6 = (struct addrinfo*) 0;
@@ -176,7 +178,7 @@ socket_handle_t socket_connect_host_port( char* hostname, unsigned short port )
         goto ok;
     }
     
-    socket_send_error( 404, "Not Found", (char*) 0, "Unknown host." );
+    socket_throw_error(sockfd, errno, "Unknown host." );
     
 ok:
     freeaddrinfo( ai );
@@ -184,8 +186,12 @@ ok:
 #else /* USE_IPV6 */
     
     he = gethostbyname( hostname );
-    if ( he == (struct hostent*) 0 )
-        socket_send_error( 404, "Not Found", (char*) 0, "Unknown host." );
+    if ( he == (struct hostent*) 0 ){
+        printf("ERROR gethostname %d %s\n", errno, strerror(errno));
+        socket_throw_error(sockfd, errno,   "Unknown host." );
+        *status = errno;
+        return 0;
+    }
     sock_family = sa.sin_family = he->h_addrtype;
     sock_type = SOCK_STREAM;
     sock_protocol = 0;
@@ -196,15 +202,29 @@ ok:
 #endif /* USE_IPV6 */
     
     sockfd = socket( sock_family, sock_type, sock_protocol );
-    if ( sockfd < 0 )
-        socket_send_error( 500, "Internal Error", (char*) 0, "Couldn't create socket." );
+    if ( sockfd < 0 ){
+        printf("ERROR socket %d %s\n", errno, strerror(errno));
+        socket_throw_error(sockfd, errno,  "socket call refused." );
+        *status = errno;
+        return 0;
+    }
+//    int result;
+//    int yes = 1;
+//    if( (result = setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes))) != 0 )
+//    {
+//        printf("ERROR setsockoptt %d %s\n", errno, strerror(errno));
+//        socket_throw_error(sockfd, errno, "the setsockopt failed %d");
+//    }
 
     int value = 1;
     setsockopt(sockfd, SOL_SOCKET, SO_NOSIGPIPE, &value, sizeof(value));
 
-    if ( connect( sockfd, (struct sockaddr*) &sa, sa_len ) < 0 )
-        socket_send_error( 503, "Service Unavailable", (char*) 0, "Connection refused." );
-    
+    if ( connect( sockfd, (struct sockaddr*) &sa, sa_len ) < 0 ){
+        printf("ERROR connect %d %s\n", errno, strerror(errno));
+        socket_throw_error(sockfd, errno,  "Connection refused." );
+        *status = errno;
+        return 0;
+    }
     return sockfd;
 }
 
@@ -358,7 +378,7 @@ int socket_read_data( socket_handle_t socket, void* buffer, int buffer_length, i
         
     }else if( howMuch == 0 && (! isError) )
     {
-        printf("%d  read got ZERO %d \n", socket, howMuch);
+        //printf("%d  read got ZERO %d \n", socket, howMuch);
         shutdown(socket, SHUT_RD);
         *status = SOCKET_STATUS_EOF;
     }

@@ -7,12 +7,15 @@
 #define INCLUDE_SOCKET_FUNCTIONS = 1
 
 typedef int socket_handle_t;
-class Buffer;
 
+#include "ErrorCodes.h"
+
+#ifndef SOCKET_STATUS_GOOD
 #define SOCKET_STATUS_GOOD  0
-#define SOCKET_STATUS_EOF   -1
-#define SOCKET_STATUS_ERROR -2
+#define SOCKET_STATUS_EOF   -1001
+#define SOCKET_STATUS_ERROR -1002
 
+#endif
 void socket_throw_error(socket_handle_t socket, int errorno, std::string message);
 
 void socket_report_error(std::string format, ...);
@@ -26,11 +29,11 @@ socket_handle_t sockt_create_listener_on_port(int port);
 // Connect to a host/port and return the socket that established the connection.
 // Returns the fd of the openned socket that implements the connection.
 //
-// ipAddress is a NSString representation of the host/port ip address.
+// ipAddress is a char* representation of the host/port ip address.
 //
 // Uses conditional compilation to include/exclude code to handle ipv6
 //
-socket_handle_t socket_connect_host_port( char* hostname, unsigned short port);
+socket_handle_t socket_connect_host_port( char* hostname, unsigned short port, int* status);
 
 socket_handle_t socket_create_listener_on_port(int port);
 
