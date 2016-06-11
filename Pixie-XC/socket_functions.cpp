@@ -26,7 +26,6 @@
 
 void socket_throw_error(socket_handle_t socket, int errorno, std::string message)
 {
-    char* msg;
     const char* m = message.c_str();
     int eno = (int) errorno;
     int socket_fd = (int) socket;
@@ -331,7 +330,6 @@ void socket_wait_for_write_flush(socket_handle_t socket)
 bool socket_write_data(socket_handle_t socket,  void* buffer, int buffer_length, int* status)
 {
     int res = (int)write(socket, buffer, buffer_length);
-    int saved_errno = errno;
     
     //
     // assuming blocking write so that will not return until all done - unless error

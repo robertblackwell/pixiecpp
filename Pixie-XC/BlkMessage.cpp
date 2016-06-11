@@ -8,6 +8,34 @@
 #include "Logger.h"
 #include "BlkMessage.h"
 
+BlkMessage::BlkMessage()
+{
+    firstLine = "START";
+    
+}
+BlkMessage::BlkMessage(int _destination_port, std::string _verb, std::string bodyString)
+: destination_port(_destination_port), request_verb(_verb), body(bodyString)
+{
+    firstLine = "START";
+//    destination_port = _destination_port;
+//    request_verb = _verb;
+//    body = bodyString;
+    messageLength = (int)body.length();
+    
+}
+void BlkMessage::toRawString(std::string& rawMessage)
+{
+    rawMessage = "";
+    rawMessage += firstLine;
+    rawMessage += "\n";
+    rawMessage += std::to_string(destination_port);
+    rawMessage += "\n";
+    rawMessage += request_verb;
+    rawMessage += "\n";
+    rawMessage += std::to_string(messageLength);
+    rawMessage += "\n";
+    rawMessage += body;
+}
 
 BlkParser::BlkParser(BlkMessage& message): msg(message)
 {

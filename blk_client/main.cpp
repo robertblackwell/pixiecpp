@@ -19,13 +19,18 @@ void* worker(void* args){
 //    LOG(INFO) << "Worker started" << (long)args << std::endl;
     for(int i = 0; i < NBR_REQUESTS_PER_THREAD; i++)
     {
-        BlkClient client;
-        client.host = "localhost";
-        client.port = 8001;
-        std::string bdy = "0192837465";
-        client.setBody(bdy);
-        client.connect(status);
-        client.executeRequest(status);
+        
+        BlkMessage msg{8001, std::string("NORMAL"), std::string("00119922883377446655")};
+        
+        BlkClient client{"localhost", "a_url", 8001,  msg};
+        if( ! client.connect(status) ){
+            LOG(ERROR) << "Connect for worker : " << i << " Failed status " << status  << std::endl;
+            break;
+        }
+        if( !client.executeRequest(status) ){
+            LOG(ERROR) << "executeRequest for  worker : " << i << " Failed status "<< status << std::endl;
+            break;
+        }
         client.close();
     }
     
@@ -50,7 +55,11 @@ int main(int argc, const char * argv[])
         
         for( int i = 0; i < NBR_THREADS; i++){
             pthread_t* th = &(threads[i]);
-            int rc =  pthread_create(th, NULL, worker, (void*)i);
+            int rc =  pthread_create(th, NULL, worker, (void*)(long)i);
+            if( rc != 0 ){
+                LOG(ERROR) << " UNHANDLED ERROR ******* "<< std::endl;
+                
+            }
         }
         
     }
@@ -66,6 +75,9 @@ int main(int argc, const char * argv[])
     {
         pthread_t* th = &(threads[i]);
         int rc = pthread_join(*th, NULL);
+        if( rc != 0 ){
+            LOG(ERROR) << " UNHANDLED ERROR ******* "<< std::endl;
+        }
     }
     auto end = std::chrono::high_resolution_clock::now();
     float duration = (float)(std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count() / 1000000000.0);

@@ -21,6 +21,19 @@
 #include "Monitor.h"
 #include "Server.h"
 
+//
+// TODO: 3. !!HIGH PRIORITY - need to add retry loginc to all (not all just connection)socket operations
+// TODO: 1. upgrade test harness - multiple servers each on separate port, separate client for each server
+// TODO: 2. upgrade test harness - clients need to check the returned message and verify it is as expected
+// TODO: still has a bug when client can send more than one message-hypothesis -- its a problem with the server
+// TODO: better buffer management - BlkMessage needs to have a ref/ptr to body not value definition
+// TODO: dispatcher to allow varying number of worker tasks
+// TODO: connection pooling for connections to server
+// TODO: better statistics
+// TODO: pass through handler for situations where dont want to parse messages - preparation for SSL
+// TODO: how will SSL fit in
+//
+
 Server::Server(Protocol _protocol, unsigned _nbr_workers)
 {
     protocol = _protocol;

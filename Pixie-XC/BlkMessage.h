@@ -38,6 +38,9 @@ public:
     std::string     request_verb;
     int             messageLength;
     std::string     body;
+    BlkMessage();
+    BlkMessage(int  destination_port, std::string verb, std::string bodyString);
+    void            toRawString(std::string& rawMessage);
 };
 
 

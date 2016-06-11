@@ -68,19 +68,23 @@ bool BlkSocket::readMessage(BlkMessage& msg, int& status)
 bool BlkSocket::writeMessage(BlkMessage& msg, int& status)
 {
     std::string rawMessage("");
-    rawMessage += msg.firstLine;
-    rawMessage += "\n";
-    rawMessage += std::to_string(msg.destination_port);
-    rawMessage += "\n";
-    rawMessage += msg.request_verb;
-    rawMessage += "\n";
-    rawMessage += std::to_string(msg.messageLength);
-    rawMessage += "\n";
-    rawMessage += msg.body;
+    msg.toRawString(rawMessage);
+//    rawMessage += msg.firstLine;
+//    rawMessage += "\n";
+//    rawMessage += std::to_string(msg.destination_port);
+//    rawMessage += "\n";
+//    rawMessage += msg.request_verb;
+//    rawMessage += "\n";
+//    rawMessage += std::to_string(msg.messageLength);
+//    rawMessage += "\n";
+//    rawMessage += msg.body;
     const char* buffer = rawMessage.c_str();
     int   buffer_length = (int)strlen(buffer);
     int sockStatus;
-    bool x = socket_write_data(socket, (void*)buffer, buffer_length, &sockStatus);
+    bool good = socket_write_data(socket, (void*)buffer, buffer_length, &sockStatus);
+    if( ! good ){
+        LOG(ERROR) << " UNHANDLED ERROR ******* "<< std::endl;
+    }
     
     return true;
 }

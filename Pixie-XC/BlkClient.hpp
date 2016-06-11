@@ -26,12 +26,10 @@ public:
     BlkMessage              responseMessage{};
     BlkSocket               messageSocket{};
     
-    BlkClient();
-    BlkClient(std::string url, int port);
+    BlkClient(std::string _host, std::string _url, int _port);
+    BlkClient(std::string _host, std::string _url, int _port, BlkMessage& _requestMessage);
+    
     bool    connect(int& status);
-    void    setBody(std::string& body);
-
-    void    formatRequest();
     
     bool    executeRequest(int& status);
     

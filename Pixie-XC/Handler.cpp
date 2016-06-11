@@ -164,6 +164,9 @@ void Handler::handleLoopBack()
             // process the message and send response
             int status;
             bool res = myMessageSocket.writeMessage(msg, status);
+            if( res != 0 ){
+                LOG(ERROR) << " UNHANDLED ERROR ******* "<< std::endl;
+            }
             std::cout << "Done one " << std::endl;
             
         }

@@ -14,18 +14,22 @@
 #include "BlkClient.hpp"
 
 
-BlkClient::BlkClient()
+BlkClient::BlkClient(std::string _host, std::string _url, int _port) :  host(_host),
+                                                                        url(_url),
+                                                                        port(_port)
 {
-    host = "";
-    url = "";
-    port = 0;
+    std::cout <<  " got here  " << std::endl;
 }
 
-BlkClient::BlkClient(std::string _url, int _port)
+
+BlkClient::BlkClient(std::string _host, std::string _url, int _port, BlkMessage& _requestMessage) :    host(_host),
+                                                                                    url(_url),
+                                                                                    port(_port),
+                                                                                    requestMessage(_requestMessage)
 {
-    url = _url;
-    port = _port;
+    std::cout <<  " got here  " << std::endl;
 }
+
 
 bool BlkClient::connect(int& status)
 {
@@ -49,28 +53,6 @@ bool BlkClient::connect(int& status)
     }
     status = local_status;
     return (local_status == 0);
-}
-
-void BlkClient::setBody(std::string& body)
-{
-    requestMessage.firstLine = "START";
-    requestMessage.destination_port =  port ;
-    requestMessage.request_verb = std::string("NORMAL");
-    requestMessage.body = body;
-    requestMessage.messageLength = (int)body.length();
-}
-void BlkClient::formatRequest()
-{
-    return;
-//    requestMessage.firstLine = std::string{"START"};
-//    requestMessage.destination = std::to_string(port);
-//    requestMessage.request_verb = std::string("NORMAL)
-//    requestMessage.messageLength = 10;
-//    requestMessage.body = "0123456789";
-
-    requestMessage.firstLine = std::string{"START"};
-    requestMessage.messageLength = 10;
-    requestMessage.body = "0123456789";
 }
 
 bool    BlkClient::executeRequest(int& status)
