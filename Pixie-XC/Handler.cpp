@@ -48,6 +48,73 @@ void Handler::handle()
             break;
     }
 }
+//
+// Inspect the message "msg" to see how it should be processed.
+// Primarily looking for tunnel requests compared to "normal" proxy processing
+//
+void Handler::dispatch(BlkMessage& msg)
+{
+    
+}
+void Handler::normalBlkProxy(BlkMessage& msg)
+{
+    // process the message and send response
+    int status;
+    std::string host = std::string("localhost");
+    int 		port = msg.destination_port;
+    std::string	url	 = std::string("dont care");
+    for(;;)
+    {
+        BlkClient client{host, url, port, msg};
+        
+        //
+        // Try a number of times to connect - BUT dont retry IO operations
+        //
+        bool   is_connected = false;
+        int     retry_count = 0;
+        while(
+              ((is_connected  = client.connect(status)) == false)
+              &&
+              (retry_count++ < 3)
+              )
+        {
+            LOG(ERROR) << "Client Failed to connect with server" << std::endl;
+            sleep(2);
+        }
+        
+        if( is_connected )
+        {
+            blk_proxy_rules(msg, client.requestMessage);
+            if( client.executeRequest(status) )
+            {
+                bool res = this->messageSocket.writeMessage(client.responseMessage, status);
+                if( ! res ){
+                    LOG(ERROR) << "UNHANDLED ERROR " << std::endl;
+                }
+            }
+        }
+        client.close();
+        if( status != 0 ){
+            this->messageSocket.close();
+            break;
+        }
+        bool gotMessage = this->messageSocket.readMessage(msg, status);
+        if( gotMessage && status == BLK_READ_STATUS_OK  && pipelining_supported)
+        {
+        }
+        else
+        {
+            this->messageSocket.close();
+            break;
+        }
+
+    }
+
+}
+void Handler::tunnelBlkProxy(BlkMessage& msg)
+{
+    
+}
 void Handler::handleHttpProxy()
 {
 }
@@ -56,7 +123,7 @@ void Handler::handleBlkProxy()
 {
 
     BlkSocket myMessageSocket(socket_fd);
-
+    messageSocket.socket = socket_fd;
     int count = 0;
     //    LOG(DEBUG) << "SocketHandler id : " << id <<  " socket : " << socket_fd << std::endl;
     
@@ -64,8 +131,11 @@ void Handler::handleBlkProxy()
     << " socket: " << socket_fd
     << " count : " << count
     << std::endl;
-    
+
+#define NEWPROXY
+#ifndef NEWPROXY
     while(true)
+#endif
     {
         count++;
         //        LOG(DEBUG)  << "worker id : " << id
@@ -82,10 +152,14 @@ void Handler::handleBlkProxy()
             if( msg.isTunnelRequest() ){
                 
                 LOG(DEBUG) << "got a tunnel request" << std::endl;
-                TunnelHandler tunnelHandler{msg};
-                tunnelHandler.handle();
+//                TunnelHandler tunnelHandler{msg};
+//                tunnelHandler.handle();
                 
             }else{
+#ifdef NEWPROXY
+                normalBlkProxy(msg);
+//                return;
+#else
                 // process the message and send response
 
                 std::string host = std::string("localhost");
@@ -124,22 +198,30 @@ void Handler::handleBlkProxy()
                 }
                 if( ! pipelining_supported )
                     break;
+#endif
             }
+
         }
         else if( status == BLK_READ_STATUS_EOF)
         {
             myMessageSocket.close();
+#ifndef NEWPROXY
             break;
+#endif
         }
         if(status == BLK_READ_STATUS_PARSE_ERROR)
         {
             myMessageSocket.close();
+#ifndef NEWPROXY
             break;
+#endif
         }
         else if( status == BLK_READ_STATUS_IOERROR)
         {
-            // close the connection
+            myMessageSocket.close();
+#ifndef NEWPROXY
             break;
+#endif
         }
     }
     
