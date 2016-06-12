@@ -35,8 +35,10 @@ void Worker::main()
         active_socket = (int) mySocketHandle;
         try
         {
+            active = true;
             Handler handler{protocol, mySocketHandle, id};
             handler.handle();
+            active = false;
         }
         catch (std::exception e)
         {

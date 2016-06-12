@@ -119,7 +119,7 @@ socket_handle_t socket_connect_host_port( char* hostname, unsigned short port, i
     hints.ai_socktype = SOCK_STREAM;
     (void) snprintf( portstr, sizeof(portstr), "%d", (int) port );
     if ( (gaierr = getaddrinfo( hostname, portstr, &hints, &ai )) != 0 ){
-        socket_send_error( 404, "Not Found", (char*) 0, "Unknown host." );
+        socket_throw_error(0, errno, "getaddrinfo failed");
         *status = errno;
         return 0;
     }
@@ -225,6 +225,31 @@ ok:
         return 0;
     }
     return sockfd;
+}
+bool    socket_is_blocking(socket_handle_t socket)
+{
+    int     val;
+    bool    is_blocking = false;
+    int junk = O_NONBLOCK;
+    int tmp;
+    int tmp2;
+    
+    if ( (val = fcntl(socket, F_GETFL, 0)) < 0)
+    {
+        socket_throw_error(socket, errno,  "FCNTL failed" );
+    }
+    else
+    {
+        int t1 = 0x0004;
+        int t2 = 0xFFF2;
+        int t3 = t1 & t2;
+        int t4 = ! t3;
+        
+        tmp = (val & O_NONBLOCK);
+        tmp2 = ! tmp;
+        is_blocking = !(val & O_NONBLOCK);
+    }
+    return is_blocking;
 }
 
 socket_handle_t socket_set_blocking(socket_handle_t socket)
@@ -347,11 +372,13 @@ bool socket_write_data(socket_handle_t socket,  void* buffer, int buffer_length,
     }
     else if( res < 0 )
     {
+        socket_throw_error(socket, errno, "write failed r < 0");
         *status = SOCKET_STATUS_ERROR;
         return false;
     }
     else
     {   
+        socket_throw_error(socket, errno, "write failed else");
         *status = SOCKET_STATUS_ERROR;
         return false;
     }
@@ -376,15 +403,18 @@ int socket_read_data( socket_handle_t socket, void* buffer, int buffer_length, i
         
     }else if( howMuch == 0 && (! isError) )
     {
-        //printf("%d  read got ZERO %d \n", socket, howMuch);
-        shutdown(socket, SHUT_RD);
+//        socket_throw_error(socket, errno, "read error");
+//        shutdown(socket, SHUT_RD);
         *status = SOCKET_STATUS_EOF;
     }
     else
     {
-        printf("%d read error  %d %s \n", socket, saved_errno, strerror(saved_errno));
-        shutdown(socket, SHUT_RDWR);
-        *status = SOCKET_STATUS_ERROR;
+        socket_throw_error(socket, errno, "read failed");
+//        shutdown(socket, SHUT_RDWR);
+        if( saved_errno == EAGAIN )
+            *status = SOCKET_STATUS_EAGAIN;
+        else
+            *status = SOCKET_STATUS_ERROR;
     }
     return howMuch;
 }

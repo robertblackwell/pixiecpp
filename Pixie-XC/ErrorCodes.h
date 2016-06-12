@@ -12,6 +12,7 @@
 #define SOCKET_STATUS_GOOD              0
 #define SOCKET_STATUS_EOF               -1001
 #define SOCKET_STATUS_ERROR             -1002
+#define SOCKET_STATUS_EAGAIN            -1003
 
 #define  BLK_READ_STATUS_OK             0
 #define  BLK_READ_STATUS_EOF            -2004 //-   got an EOF and no data

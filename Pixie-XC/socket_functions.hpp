@@ -14,6 +14,7 @@ typedef int socket_handle_t;
 #define SOCKET_STATUS_GOOD  0
 #define SOCKET_STATUS_EOF   -1001
 #define SOCKET_STATUS_ERROR -1002
+#define SOCKET_STAUTS_EAGAIN -1003
 
 #endif
 void socket_throw_error(socket_handle_t socket, int errorno, std::string message);
@@ -38,6 +39,8 @@ socket_handle_t socket_connect_host_port( char* hostname, unsigned short port, i
 socket_handle_t socket_create_listener_on_port(int port);
 
 socket_handle_t socket_set_blocking(socket_handle_t socket);
+
+bool    socket_is_blocking(socket_handle_t socket);
 
 socket_handle_t socket_set_non_blocking(socket_handle_t socket);
 

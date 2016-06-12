@@ -26,7 +26,7 @@ int main(int argc, const char * argv[])
     el::Configurations defaultConf;
     defaultConf.setToDefault();
     //    defaultConf.set(el::Level::Info, el::ConfigurationType::Enabled, "false");
-    //    defaultConf.set(el::Level::Debug, el::ConfigurationType::Enabled, "false");
+    defaultConf.set(el::Level::Debug, el::ConfigurationType::Enabled, "true");
     defaultConf.set(el::Level::Global, el::ConfigurationType::Format, "%level|%func[%fbase:%line] : %msg");
     el::Loggers::reconfigureAllLoggers(defaultConf);
     
