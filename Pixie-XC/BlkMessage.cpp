@@ -36,6 +36,10 @@ void BlkMessage::toRawString(std::string& rawMessage)
     rawMessage += "\n";
     rawMessage += body;
 }
+bool    BlkMessage::isTunnelRequest()
+{
+    return (request_verb == "TUNNEL");
+}
 
 BlkParser::BlkParser(BlkMessage& message): msg(message)
 {

@@ -41,6 +41,7 @@ public:
     BlkMessage();
     BlkMessage(int  destination_port, std::string verb, std::string bodyString);
     void            toRawString(std::string& rawMessage);
+    bool            isTunnelRequest();
 };
 
 

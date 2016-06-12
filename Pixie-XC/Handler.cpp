@@ -79,45 +79,52 @@ void Handler::handleBlkProxy()
         bool gotMessage = myMessageSocket.readMessage(msg, status);
         if( gotMessage && status == BLK_READ_STATUS_OK )
         {
-            // process the message and send response
-
-            std::string host = std::string("localhost");
-            int 		port = msg.destination_port;
-            std::string	url	 = std::string("dont care");
-			
-		    BlkClient client{host, url, port, msg};
-			
-            //
-            // Try a number of times to connect - BUT dont retry IO operations
-            //
-            bool   is_connected = false;
-            int     retry_count = 0;
-            while(
-                  ((is_connected  = client.connect(status)) == false)
-                   &&
-                  (retry_count++ < 3)
-                  )
-            {
-				LOG(ERROR) << "Client Failed to connect with server" << std::endl;
-                sleep(2);
-            }
+            if( msg.isTunnelRequest() ){
                 
-            if( is_connected )
-            {
-                blk_proxy_rules(msg, client.requestMessage);
-                if( client.executeRequest(status) )
+                LOG(DEBUG) << "got a tunnel request" << std::endl;
+                TunnelHandler tunnelHandler{msg};
+                tunnelHandler.handle();
+                
+            }else{
+                // process the message and send response
+
+                std::string host = std::string("localhost");
+                int 		port = msg.destination_port;
+                std::string	url	 = std::string("dont care");
+                
+                BlkClient client{host, url, port, msg};
+                
+                //
+                // Try a number of times to connect - BUT dont retry IO operations
+                //
+                bool   is_connected = false;
+                int     retry_count = 0;
+                while(
+                      ((is_connected  = client.connect(status)) == false)
+                       &&
+                      (retry_count++ < 3)
+                      )
                 {
-                    bool res = myMessageSocket.writeMessage(client.responseMessage, status);
+                    LOG(ERROR) << "Client Failed to connect with server" << std::endl;
+                    sleep(2);
                 }
+                    
+                if( is_connected )
+                {
+                    blk_proxy_rules(msg, client.requestMessage);
+                    if( client.executeRequest(status) )
+                    {
+                        bool res = myMessageSocket.writeMessage(client.responseMessage, status);
+                    }
+                }
+                client.close();
+                if( status != 0 ){
+                    myMessageSocket.close();
+                    break;
+                }
+                if( ! pipelining_supported )
+                    break;
             }
-            client.close();
-            if( status != 0 ){
-                myMessageSocket.close();
-                break;
-            }
-            if( ! pipelining_supported )
-                break;
-            
         }
         else if( status == BLK_READ_STATUS_EOF)
         {

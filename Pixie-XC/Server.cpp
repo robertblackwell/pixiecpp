@@ -23,6 +23,7 @@
 
 //
 // TODO: 3. !!HIGH PRIORITY - need to add retry loginc to all (not all just connection)socket operations
+// TODO: 3. find all the errors that are NOT HANDLED and do something ANYTHING with them
 // TODO: 1. upgrade test harness - multiple servers each on separate port, separate client for each server
 // TODO: 2. upgrade test harness - clients need to check the returned message and verify it is as expected
 // TODO: still has a bug when client can send more than one message-hypothesis -- its a problem with the server

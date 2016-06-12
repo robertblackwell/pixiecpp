@@ -35,7 +35,7 @@ void Worker::main()
         active_socket = (int) mySocketHandle;
         try
         {
-            Handler handler{Protocol::LOOPBACK, mySocketHandle, id};
+            Handler handler{protocol, mySocketHandle, id};
             handler.handle();
         }
         catch (std::exception e)
