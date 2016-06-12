@@ -25,10 +25,10 @@ public:
     Handler(Protocol protocol, socket_handle_t socket_handle, int _id);
     void handle();
 private:
-    void dispatch(BlkMessage& msg);
     void handleLoopBack();
-    void handleBlkProxy();
     void handleHttpProxy();
+
+    void handleBlkProxy();
     void normalBlkProxy(BlkMessage& msg);
     void tunnelBlkProxy(BlkMessage& msg);
 };

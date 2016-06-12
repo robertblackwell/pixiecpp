@@ -8,9 +8,127 @@
 #include <unistd.h>
 #include "Logger.h"
 #include "socket_functions.hpp"
+#include "Thread.h"
 #include "Handler.hpp"
 #include "BlkSocket.h"
 #include "BlkClient.hpp"
+#include <pthread.h>
+
+#pragma mark - implementation of raw channel
+/**
+ * --------------------------------------------------------------------------------------------
+ */
+class RawOneWayChannel
+{
+public:
+    int         readSocket;
+    int         writeSocket;
+    
+    RawOneWayChannel(int _readSocket, int writeSocket);
+    void startChannel();
+    void run(int count, std::string message);
+    
+};
+
+RawOneWayChannel::RawOneWayChannel(int _readSocket, int _writeSocket)
+    : readSocket(_readSocket), writeSocket(_writeSocket)
+{
+    
+}
+void RawOneWayChannel::startChannel()
+{
+    run(10, "RawOneWayChannel");
+}
+
+//
+// This is where the real work is to be done - a name that can be used in
+// both derived classes. The use of Thread class
+// makes the names "start" and "main" unavailable
+//
+void RawOneWayChannel:: run(int count, std::string message)
+{
+    for(int i = 0; i < count; i++) {
+        LOG(ERROR) << message << i << std::endl;
+        sleep(1);
+    }
+    
+}
+
+/**
+ * --------------------------------------------------------------------------------------------
+ */
+
+class RawOneWayThreadedChannel: public Thread, public RawOneWayChannel
+{
+public:
+    pthread_t   thread;
+    
+    RawOneWayThreadedChannel(int _readSocket, int _writeSocket);
+    void startThread();
+    void main();
+};
+
+RawOneWayThreadedChannel::RawOneWayThreadedChannel(int _readSocket, int _writeSocket)
+                                        :RawOneWayChannel(_readSocket, _writeSocket)
+{
+    
+}
+void RawOneWayThreadedChannel::main()
+{
+    run(10, "RawOneWayThreadedChannel");
+//    for(int i = 0; i < 20; i++){
+//        LOG(ERROR) << "threaded channel i:  " << i << std::endl;
+//        sleep(1);
+//    }
+    
+}
+void RawOneWayThreadedChannel::startThread()
+{
+    bool w = start();
+}
+
+
+/**
+ * --------------------------------------------------------------------------------------------
+ */
+
+
+class RawTwoWayChannel
+{
+public:
+    int                         socketHandleOne;
+    RawOneWayChannel            channelOne;
+    
+    int                         socketHandleTwo;
+    RawOneWayThreadedChannel    channelTwo;
+    
+    RawTwoWayChannel(int _socketHandleOne, int _socketHandleTwo);
+    void start();
+    
+private:
+    
+};
+
+RawTwoWayChannel::RawTwoWayChannel(int _socketHandleOne, int _socketHandleTwo)
+                :   socketHandleOne(_socketHandleOne),
+                socketHandleTwo(_socketHandleTwo),
+                channelOne{_socketHandleOne, _socketHandleTwo},
+                channelTwo{_socketHandleTwo, _socketHandleOne}
+
+{
+}
+
+
+void RawTwoWayChannel::start()
+{
+    channelTwo.startThread();
+    channelOne.startChannel();
+    LOG(ERROR) << "after starting both channels   " <<  std::endl;
+    
+    // wait for the subordinate thread to complete
+    pthread_join(channelTwo.pthread, NULL);
+    LOG(ERROR) << "after waiting for sub thread   " <<  std::endl;
+}
 
 // TODO: need to break this out into a separate class, one for each proxy protocol
 // Applies the rules for turning a proxied request into a final request.
@@ -48,14 +166,58 @@ void Handler::handle()
             break;
     }
 }
-//
-// Inspect the message "msg" to see how it should be processed.
-// Primarily looking for tunnel requests compared to "normal" proxy processing
-//
-void Handler::dispatch(BlkMessage& msg)
+
+#pragma mark - HTTP protocol handlers
+
+void Handler::handleHttpProxy()
 {
+}
+
+#pragma mark - Blk protocol proxy handlers
+void Handler::handleBlkProxy()
+{
+    BlkSocket myMessageSocket(socket_fd);
+    messageSocket.socket = socket_fd;
+    BlkMessage msg;
+    int status;
+    LOG(DEBUG)  << "Handler starting worker id : " << id << " socket: " << socket_fd << std::endl;
+    
+    bool gotMessage = myMessageSocket.readMessage(msg, status);
+    if( gotMessage && status == BLK_READ_STATUS_OK )
+    {
+        if( msg.isTunnelRequest() )
+        {
+            tunnelBlkProxy(msg);
+        }
+        else
+        {
+            normalBlkProxy(msg);
+        }
+
+    }
+    else if( ( status == BLK_READ_STATUS_EOF)
+        || (status == BLK_READ_STATUS_PARSE_ERROR)
+        || ( status == BLK_READ_STATUS_IOERROR))    {
+        
+        myMessageSocket.close();
+    }
+    LOG(DEBUG)  << "Handler ending worker id : " << id << " socket: " << socket_fd<< std::endl;
+}
+
+void Handler::tunnelBlkProxy(BlkMessage& msg)
+{
+    LOG(DEBUG) << "got a tunnel request" << std::endl;
+    int status;
+    char*   host = "localhost";
+    int upstreamPort = msg.destination_port;
+    int upstreamRawSocket = socket_connect_host_port(host,upstreamPort,&status);
+    LOG(DEBUG) << "tunnel request connection socket: " << upstreamRawSocket << " status: " << status << std::endl;
+    
+    RawTwoWayChannel  channel{socket_fd, upstreamRawSocket};
+    channel.start();
     
 }
+
 void Handler::normalBlkProxy(BlkMessage& msg)
 {
     // process the message and send response
@@ -107,129 +269,13 @@ void Handler::normalBlkProxy(BlkMessage& msg)
             this->messageSocket.close();
             break;
         }
-
-    }
-
-}
-void Handler::tunnelBlkProxy(BlkMessage& msg)
-{
-    
-}
-void Handler::handleHttpProxy()
-{
-}
-
-void Handler::handleBlkProxy()
-{
-
-    BlkSocket myMessageSocket(socket_fd);
-    messageSocket.socket = socket_fd;
-    int count = 0;
-    //    LOG(DEBUG) << "SocketHandler id : " << id <<  " socket : " << socket_fd << std::endl;
-    
-    LOG(DEBUG)  << "Handler starting worker id : " << id
-    << " socket: " << socket_fd
-    << " count : " << count
-    << std::endl;
-
-#define NEWPROXY
-#ifndef NEWPROXY
-    while(true)
-#endif
-    {
-        count++;
-        //        LOG(DEBUG)  << "worker id : " << id
-        //            << " socket: " << socket_fd
-        //            << " count : " << count
-        //            << std::endl;
         
-        BlkMessage msg;
-        int status;
-        
-        bool gotMessage = myMessageSocket.readMessage(msg, status);
-        if( gotMessage && status == BLK_READ_STATUS_OK )
-        {
-            if( msg.isTunnelRequest() ){
-                
-                LOG(DEBUG) << "got a tunnel request" << std::endl;
-//                TunnelHandler tunnelHandler{msg};
-//                tunnelHandler.handle();
-                
-            }else{
-#ifdef NEWPROXY
-                normalBlkProxy(msg);
-//                return;
-#else
-                // process the message and send response
-
-                std::string host = std::string("localhost");
-                int 		port = msg.destination_port;
-                std::string	url	 = std::string("dont care");
-                
-                BlkClient client{host, url, port, msg};
-                
-                //
-                // Try a number of times to connect - BUT dont retry IO operations
-                //
-                bool   is_connected = false;
-                int     retry_count = 0;
-                while(
-                      ((is_connected  = client.connect(status)) == false)
-                       &&
-                      (retry_count++ < 3)
-                      )
-                {
-                    LOG(ERROR) << "Client Failed to connect with server" << std::endl;
-                    sleep(2);
-                }
-                    
-                if( is_connected )
-                {
-                    blk_proxy_rules(msg, client.requestMessage);
-                    if( client.executeRequest(status) )
-                    {
-                        bool res = myMessageSocket.writeMessage(client.responseMessage, status);
-                    }
-                }
-                client.close();
-                if( status != 0 ){
-                    myMessageSocket.close();
-                    break;
-                }
-                if( ! pipelining_supported )
-                    break;
-#endif
-            }
-
-        }
-        else if( status == BLK_READ_STATUS_EOF)
-        {
-            myMessageSocket.close();
-#ifndef NEWPROXY
-            break;
-#endif
-        }
-        if(status == BLK_READ_STATUS_PARSE_ERROR)
-        {
-            myMessageSocket.close();
-#ifndef NEWPROXY
-            break;
-#endif
-        }
-        else if( status == BLK_READ_STATUS_IOERROR)
-        {
-            myMessageSocket.close();
-#ifndef NEWPROXY
-            break;
-#endif
-        }
     }
     
-    LOG(DEBUG)  << "Handler ending worker id : " << id
-        << " socket: " << socket_fd
-        << " count : " << count
-        << std::endl;
 }
+
+#pragma mark - Blk protocol loopback handlers
+
 void Handler::handleLoopBack()
 {
     BlkSocket myMessageSocket(socket_fd);

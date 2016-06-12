@@ -442,27 +442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pixie-XC/Handler.cpp"
-            timestampString = "487446414.551115"
+            timestampString = "487454397.04002"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
-            landmarkName = "Handler::handleBlkProxy()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Pixie-XC/Handler.cpp"
-            timestampString = "487395892.211967"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "Handler::handle()"
             landmarkType = "5">
          </BreakpointContent>
@@ -486,31 +470,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Pixie-XC/Handler.cpp"
-            timestampString = "487445840.588782"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "Handler::normalBlkProxy(BlkMessage&amp; msg)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pixie-XC/Handler.cpp"
-            timestampString = "487446414.551115"
+            timestampString = "487454397.04002"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
             landmarkName = "Handler::handleLoopBack()"
             landmarkType = "5">
          </BreakpointContent>
@@ -522,12 +490,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pixie-XC/Handler.cpp"
-            timestampString = "487446250.622733"
+            timestampString = "487454397.04002"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "Handler::normalBlkProxy(BlkMessage&amp; msg)"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "Handler::tunnelBlkProxy(BlkMessage&amp; msg)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -538,12 +506,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pixie-XC/Handler.cpp"
-            timestampString = "487445925.125553"
+            timestampString = "487454397.04002"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "Handler::normalBlkProxy(BlkMessage&amp; msg)"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "RawTwoWayChannel::start()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -554,12 +522,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pixie-XC/Handler.cpp"
-            timestampString = "487445954.331281"
+            timestampString = "487454397.04002"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "Handler::normalBlkProxy(BlkMessage&amp; msg)"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "Handler::handleBlkProxy()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -569,13 +537,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pixie-XC/Handler.cpp"
-            timestampString = "487446251.564514"
+            filePath = "Pixie-XC/Thread.cpp"
+            timestampString = "487451320.131886"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "Handler::normalBlkProxy(BlkMessage&amp; msg)"
+            startingLineNumber = "10"
+            endingLineNumber = "10"
+            landmarkName = "Thread::InternalThreadEntryFunc(void * This)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pixie-XC/Handler.cpp"
+            timestampString = "487454397.04002"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "RawTwoWayChannel::start()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
