@@ -10,7 +10,7 @@
 #include "socket_functions.hpp"
 #include "Handler.hpp"
 #include "BlkSocket.h"
-//#include "BlkClient.hpp"
+#include "BlkClient.hpp"
 
 // TODO: need to break this out into a separate class, one for each proxy protocol
 // Applies the rules for turning a proxied request into a final request.
@@ -54,9 +54,8 @@ void Handler::handleHttpProxy()
 
 void Handler::handleBlkProxy()
 {
-#ifdef CLINET
+
     BlkSocket myMessageSocket(socket_fd);
-    BlkClient client;
 
     int count = 0;
     //    LOG(DEBUG) << "SocketHandler id : " << id <<  " socket : " << socket_fd << std::endl;
@@ -82,9 +81,12 @@ void Handler::handleBlkProxy()
         {
             // process the message and send response
 
-            client.host = "localhost";
-            client.port = 8002;
-            
+            std::string host = std::string("localhost");
+            int 		port = msg.destination_port;
+            std::string	url	 = std::string("dont care");
+			
+		    BlkClient client{host, url, port, msg};
+			
             //
             // Try a number of times to connect - BUT dont retry IO operations
             //
@@ -96,6 +98,7 @@ void Handler::handleBlkProxy()
                   (retry_count++ < 3)
                   )
             {
+				LOG(ERROR) << "Client Failed to connect with server" << std::endl;
                 sleep(2);
             }
                 
@@ -137,8 +140,6 @@ void Handler::handleBlkProxy()
         << " socket: " << socket_fd
         << " count : " << count
         << std::endl;
-
-#endif
 }
 void Handler::handleLoopBack()
 {
@@ -164,7 +165,7 @@ void Handler::handleLoopBack()
             // process the message and send response
             int status;
             bool res = myMessageSocket.writeMessage(msg, status);
-            if( res != 0 ){
+            if( ! res ){
                 LOG(ERROR) << " UNHANDLED ERROR ******* "<< std::endl;
             }
             std::cout << "Done one " << std::endl;

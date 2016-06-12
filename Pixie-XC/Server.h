@@ -14,4 +14,19 @@ public:
     void listen(int _port);
 };
 
+class BlkLoopbackServer : Server
+{
+	
+};
+
+class BlkMitmServer : Server
+{
+	
+};
+
+class HttpMitmServer : Server
+{
+	
+};
+
 //Server* createServer(unsigned nbr_workers);

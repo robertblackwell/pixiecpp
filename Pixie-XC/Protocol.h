@@ -15,4 +15,9 @@ enum Protocol
     HTTP_PROXY = 33
 };
 
+class ProtocolOptions{
+	
+};
+
+
 #endif /* protocol_h */
