@@ -25,7 +25,7 @@ void SocketHandler::handle()
     while(true)
     {
         count++;
-        LOG(DEBUG)  << "worker id : "
+        LOG(DEBUG)  << " ABOUT TO READ worker id : "
         << id << " socket: "
         << socket_fd
         << " count : "
@@ -37,25 +37,50 @@ void SocketHandler::handle()
         bool gotMessage = myMessageSocket.readMessage(msg, &status);
         if( gotMessage  )
         {
+            LOG(DEBUG)  << "GOT GOOD MSG worker id : "
+            << id << " socket: "
+            << socket_fd
+            << " count : "
+            << count
+            << std::endl;
             // process the message and send response
             int status;
             bool res = myMessageSocket.writeMessage(msg, status);
+//            break;
             
         }
         else if( status == BLK_READ_STATUS_EOF)
         {
+            LOG(DEBUG)  << "GOT EOF worker id : "
+            << id << " socket: "
+            << socket_fd
+            << " count : "
+            << count
+            << std::endl;
             // orderly close the connection
-            myMessageSocket.flush();
+//            myMessageSocket.flush();
             break;
         }
         if(status == BLK_READ_STATUS_PARSE_ERROR)
         {
+            LOG(DEBUG)  << "GOT PRASEERR worker id : "
+            << id << " socket: "
+            << socket_fd
+            << " count : "
+            << count
+            << std::endl;
             // close the connection, possibly after sending an error response
-            myMessageSocket.flush();
+//            myMessageSocket.flush();
             break;
         }
         else if( status == BLK_READ_STATUS_IOERROR)
         {
+            LOG(DEBUG)  << "GOT IOERR worker id : "
+            << id << " socket: "
+            << socket_fd
+            << " count : "
+            << count
+            << std::endl;
             // close the connection
             break;
         }

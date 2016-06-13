@@ -1,0 +1,268 @@
+INFO |void Server::listen(int)[Server.cpp:35] : Hello, World!
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 0 socket : 5
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 18 socket : 6
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 0 socket: 5 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 6 socket : 7
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 18 socket: 6 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 17 socket : 8
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 3 socket : 9
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 6 socket: 7 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 17 socket: 8 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 7 socket : 10
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 3 socket: 9 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 8 socket : 11
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 16 socket : 12
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 7 socket: 10 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 13 socket : 13
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 8 socket: 11 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 11 socket : 14
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 19 socket : 15
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 16 socket: 12 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 10 socket : 16
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 13 socket: 13 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 11 socket: 14 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 19 socket: 15 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 10 socket: 16 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 0 socket: 5 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 18 socket: 6 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 6 socket: 7 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 17 socket: 8 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 3 socket: 9 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 7 socket: 10 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 8 socket: 11 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 15 socket : 17
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 15 socket: 17 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 14 socket : 18
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 5 socket : 19
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 1 socket : 20
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 14 socket: 18 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 4 socket : 21
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 5 socket: 19 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 2 socket : 22
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 1 socket: 20 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 9 socket : 23
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 4 socket: 21 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 12 socket : 24
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 2 socket: 22 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 9 socket: 23 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 12 socket: 24 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 16 socket: 12 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 13 socket: 13 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 11 socket: 14 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 19 socket: 15 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 10 socket: 16 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 15 socket: 17 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 14 socket: 18 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 5 socket: 19 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 1 socket: 20 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 4 socket: 21 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 2 socket: 22 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 9 socket: 23 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 12 socket: 24 count : 2
+
+INFO |void Server::listen(int)[Server.cpp:35] : Hello, World!
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 1 socket : 5
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 0 socket : 6
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 1 socket: 5 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 0 socket: 6 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 0 socket: 6 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 1 socket: 5 count : 2
+
+INFO |void Server::listen(int)[Server.cpp:35] : Hello, World!
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 1 socket : 5
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 0 socket : 6
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 1 socket: 5 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 0 socket: 6 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 1 socket: 5 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 0 socket: 6 count : 2
+
+INFO |void Server::listen(int)[Server.cpp:35] : Hello, World!
+
+INFO |void Server::listen(int)[Server.cpp:35] : Hello, World!
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 1 socket : 5
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 0 socket : 6
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 1 socket: 5 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 0 socket: 6 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 1 socket: 5 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 0 socket: 6 count : 2
+
+INFO |void Server::listen(int)[Server.cpp:35] : Hello, World!
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 1 socket : 6
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 0 socket : 5
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 1 socket: 6 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 0 socket: 5 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 0 socket: 5 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 1 socket: 6 count : 2
+
+INFO |void Server::listen(int)[Server.cpp:35] : Hello, World!
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 0 socket : 6
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 1 socket : 5
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 0 socket: 6 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 1 socket: 5 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:40] : GOT GOOD MSG worker id : 1 socket: 5 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 1 socket: 5 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:40] : GOT GOOD MSG worker id : 0 socket: 6 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] : worker id : 0 socket: 6 count : 2
+
+INFO |void Server::listen(int)[Server.cpp:35] : Hello, World!
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 0 socket : 5
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 1 socket : 6
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] :  ABOUT TO READ worker id : 0 socket: 5 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] :  ABOUT TO READ worker id : 1 socket: 6 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:40] : GOT GOOD MSG worker id : 0 socket: 5 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] :  ABOUT TO READ worker id : 0 socket: 5 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:40] : GOT GOOD MSG worker id : 1 socket: 6 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] :  ABOUT TO READ worker id : 1 socket: 6 count : 2
+
+INFO |void Server::listen(int)[Server.cpp:35] : Hello, World!
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 0 socket : 6
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 1 socket : 5
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] :  ABOUT TO READ worker id : 0 socket: 6 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] :  ABOUT TO READ worker id : 1 socket: 5 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:40] : GOT GOOD MSG worker id : 1 socket: 5 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 1 socket : 7
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] :  ABOUT TO READ worker id : 1 socket: 7 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:40] : GOT GOOD MSG worker id : 0 socket: 6 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:40] : GOT GOOD MSG worker id : 1 socket: 7 count : 1
+
+INFO |void Server::listen(int)[Server.cpp:35] : Hello, World!
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 1 socket : 5
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 0 socket : 6
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] :  ABOUT TO READ worker id : 1 socket: 5 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] :  ABOUT TO READ worker id : 0 socket: 6 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:40] : GOT GOOD MSG worker id : 1 socket: 5 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] :  ABOUT TO READ worker id : 1 socket: 5 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:40] : GOT GOOD MSG worker id : 0 socket: 6 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] :  ABOUT TO READ worker id : 0 socket: 6 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:54] : GOT EOF worker id : 1 socket: 5 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:23] : SocketHandler id : 1 socket : 7
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] :  ABOUT TO READ worker id : 1 socket: 7 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:54] : GOT EOF worker id : 0 socket: 6 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:40] : GOT GOOD MSG worker id : 1 socket: 7 count : 1
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:28] :  ABOUT TO READ worker id : 1 socket: 7 count : 2
+
+DEBUG|void SocketHandler::handle()[SocketHandler.cpp:54] : GOT EOF worker id : 1 socket: 7 count : 2
+

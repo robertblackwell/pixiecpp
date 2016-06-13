@@ -27,20 +27,20 @@ void BlkParser::error(std::string m)
     errorMessage = m;
     parseError = true;
 }
-int BlkParser::append(void* buf, int n)
+void BlkParser::append(void* buf, int n)
 {
     int bytes_consumed = 1;
     for(int i = 0; i < n; i++){
         parseCharacter(((char*)buf)[i]);
         
         if( parseError )
-            return bytes_consumed;
+            return;// bytes_consumed;
         
         if( messageComplete )
-            return bytes_consumed;
+            return;// bytes_consumed;
         bytes_consumed++;
     }
-    return -1;
+    return;// -1;
 }
 void BlkParser::nextLine()
 {

@@ -60,7 +60,7 @@ public:
     
     BlkParser(BlkMessage& message);
     void    error(std::string m);
-    int     append(void* buf, int n);
+    void    append(void* buf, int n);
     void    nextLine();
     void    finishedParsing();
     bool    parseInt(std::string s, int& value);

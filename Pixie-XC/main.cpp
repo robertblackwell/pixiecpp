@@ -33,7 +33,7 @@ int main(int argc, const char * argv[])
     
     try
     {
-        Server server{20};
+        Server server{2};
         server.listen(8001);
     }
     catch(Exception e)
