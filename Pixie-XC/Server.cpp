@@ -20,6 +20,7 @@
 #include "Listener.h"
 #include "Monitor.h"
 #include "Server.h"
+#include "ConnectionPool.hpp"
 
 //
 // TODO: 3. !!HIGH PRIORITY - need to add retry loginc to all (not all just connection)socket operations
@@ -46,7 +47,9 @@ void Server::listen(int _port)
 //    el::Loggers::reconfigureAllLoggers(el::ConfigurationType::Format, "%level|%func[%fbase:%line] : %msg");
   
     port = _port;
-
+    
+//    ConnectionPool::initialize();
+    
     LOG(INFO) << "Hello, World!\n";
     
     Queue  queue{};

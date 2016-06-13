@@ -44,7 +44,7 @@ void Worker::main()
         {
             std::cout << "Worker - exception from socket handler" << std::endl;
         }
-        close(mySocketHandle);
+        //close(mySocketHandle);
     }
     
 }

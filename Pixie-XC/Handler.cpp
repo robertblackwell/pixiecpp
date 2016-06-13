@@ -11,179 +11,14 @@
 #include <errno.h>
 #include "Logger.h"
 #include "socket_functions.hpp"
+#include "Queue.h"
 #include "Thread.h"
 #include "Handler.hpp"
 #include "BlkSocket.h"
 #include "BlkClient.hpp"
+#include "Channel.hpp"
+#include "ConnectionPool.hpp"
 
-#pragma mark - implementation of raw channel
-/**
- * --------------------------------------------------------------------------------------------
- */
-class RawOneWayChannel
-{
-public:
-    int         readSocket;
-    int         writeSocket;
-    int         exitStatus;
-    
-    RawOneWayChannel(int _readSocket, int writeSocket);
-    void startChannel();
-    void run(int count, std::string message);
-    
-};
-
-RawOneWayChannel::RawOneWayChannel(int _readSocket, int _writeSocket)
-    : readSocket(_readSocket), writeSocket(_writeSocket)
-{
-    
-}
-void RawOneWayChannel::startChannel()
-{
-    run(10, "RawOneWayChannel");
-}
-
-//
-// This is where the real work is to be done - a name that can be used in
-// both derived classes. The use of Thread class
-// makes the names "start" and "main" unavailable
-//
-void RawOneWayChannel:: run(int count, std::string message)
-{
-    int buffer_length = 10000;
-    char buffer[buffer_length];
-    int sockStatus;
-    int retryCount = 0;
-    
-    int status;
-    
-    for(;;){
-        LOG(DEBUG) << "channel abut to read  " << message << std::endl;
-        
-        int n = socket_read_data( readSocket, buffer, buffer_length, &sockStatus);
-        
-        LOG(DEBUG) << "channel back from read "<< message <<  " n: " << n << " status " << sockStatus << std::endl;
-        
-        if( n > 0 && sockStatus == SOCKET_STATUS_GOOD){
-            retryCount = 0;
-            std::string buffer_as_string(buffer, n);
-
-            socket_write_data(writeSocket, buffer, n, &sockStatus);
-
-            LOG(DEBUG) << "channel back from write "<< message <<  " status " << sockStatus << std::endl;
-        }else if( n < 0 && sockStatus == SOCKET_STATUS_EAGAIN ){
-            retryCount ++;
-            LOG(ERROR) << "EAGAIN on read channel rfd:  "<< readSocket
-            << " wfd: " << writeSocket
-            << "msg: " << message <<  " status: " << sockStatus << std::endl;
-            if( retryCount < 3){
-                sleep(2);
-            }else{
-                sockStatus = SOCKET_STATUS_ERROR;
-            }
-            
-        }
-        if( sockStatus == SOCKET_STATUS_GOOD){
-            status = BLK_READ_STATUS_OK;
-        }else if( sockStatus == SOCKET_STATUS_EAGAIN   ) {
-            
-        }else if( (sockStatus == SOCKET_STATUS_EOF) || (sockStatus == SOCKET_STATUS_ERROR) ){
-            status = BLK_READ_STATUS_IOERROR;
-            LOG(ERROR) << "channel rfd:  "<< readSocket
-                << " wfd: " << writeSocket
-                << "msg: " << message <<  " status: " << sockStatus << std::endl;
-            break;
-        }else{
-            assert(false);
-        }
-    }
-    return;
-    for(int i = 0; i < count; i++) {
-        LOG(ERROR) << message << i << std::endl;
-        sleep(1);
-    }
-    
-}
-
-/**
- * --------------------------------------------------------------------------------------------
- */
-
-class RawOneWayThreadedChannel: public Thread, public RawOneWayChannel
-{
-public:
-    pthread_t   thread;
-    
-    RawOneWayThreadedChannel(int _readSocket, int _writeSocket);
-    void startThread();
-    void main();
-};
-
-RawOneWayThreadedChannel::RawOneWayThreadedChannel(int _readSocket, int _writeSocket)
-                                        :RawOneWayChannel(_readSocket, _writeSocket)
-{
-    
-}
-void RawOneWayThreadedChannel::main()
-{
-    run(10, "RawOneWayThreadedChannel");
-//    for(int i = 0; i < 20; i++){
-//        LOG(ERROR) << "threaded channel i:  " << i << std::endl;
-//        sleep(1);
-//    }
-    
-}
-void RawOneWayThreadedChannel::startThread()
-{
-    bool w = start();
-}
-
-
-/**
- * --------------------------------------------------------------------------------------------
- */
-
-
-class RawTwoWayChannel
-{
-public:
-    int                         socketHandleOne;
-    RawOneWayChannel            channelOne;
-    
-    int                         socketHandleTwo;
-    RawOneWayThreadedChannel    channelTwo;
-    
-    RawTwoWayChannel(int _socketHandleOne, int _socketHandleTwo);
-    void start();
-    
-private:
-    
-};
-
-RawTwoWayChannel::RawTwoWayChannel(int _socketHandleOne, int _socketHandleTwo)
-                :   socketHandleOne(_socketHandleOne),
-                socketHandleTwo(_socketHandleTwo),
-                channelOne{_socketHandleOne, _socketHandleTwo},
-                channelTwo{_socketHandleTwo, _socketHandleOne}
-
-{
-}
-
-
-void RawTwoWayChannel::start()
-{
-    channelTwo.startThread();
-    channelOne.startChannel();
-    socket_close(socketHandleOne);
-    socket_close(socketHandleTwo);
-    
-    LOG(DEBUG) << "after starting both channels   " <<  std::endl;
-    
-    // wait for the subordinate thread to complete
-    pthread_join(channelTwo.pthread, NULL);
-    LOG(DEBUG) << "after waiting for sub thread   " <<  std::endl;
-    
-}
 
 // TODO: need to break this out into a separate class, one for each proxy protocol
 // Applies the rules for turning a proxied request into a final request.
@@ -265,16 +100,20 @@ void Handler::tunnelBlkProxy(BlkMessage& msg)
     int status;
     char*   host = "localhost";
     int upstreamPort = msg.destination_port;
+#define CONNECTION_POOL
+#ifndef CONNECTION_POOL
     int upstreamRawSocket = socket_connect_host_port(host,upstreamPort,&status);
-    
+#else
+    int upstreamRawSocket = ConnectionPool::acquire(upstreamPort);
+#endif
     socket_set_timeout(upstreamRawSocket, 5);
     socket_set_timeout(socket_fd, 5);
     
-    socket_set_blocking(upstreamRawSocket);
-    socket_set_blocking(socket_fd);
-    
-    bool blk1 = socket_is_blocking(upstreamRawSocket);
-    bool blk2 = socket_is_blocking(socket_fd);
+//    socket_set_blocking(upstreamRawSocket);
+//    socket_set_blocking(socket_fd);
+//    
+//    bool blk1 = socket_is_blocking(upstreamRawSocket);
+//    bool blk2 = socket_is_blocking(socket_fd);
     
     LOG(DEBUG) << "XXtunnel request connection upstreamSocket: " << upstreamRawSocket << " status: " << status << std::endl;
     LOG(DEBUG) << "XXtunnel request connection downStreamsocket: " << socket_fd << " status: " << status << std::endl;
@@ -298,6 +137,7 @@ void Handler::tunnelBlkProxy(BlkMessage& msg)
         << " downStreamsocket: " << socket_fd << " status: " << status << std::endl;
         exit(1);
     }
+    ConnectionPool::release(upstreamRawSocket);
 //    socket_close(upstreamRawSocket);
 //    socket_close(socket_fd);
 }
