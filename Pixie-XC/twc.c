@@ -9,12 +9,17 @@
 #include <pthread.h>
 #include "twc.h"
 
+#ifdef TWC_DEBUG
+#	define PRINTF(fmt, ...) printf(fmt, ##__VA_ARGS__)
+#else
+#	define PRINTF(fmt, ...) 
+#endif
 //------------------------------------------------------------------------------------------------------------
 //
 //------------------------------------------------------------------------------------------------------------
 void cb_dump(cbuffer_t* cb)
 {
-	printf("cbuffer: %lx buffer: %lx buffer_size: %d write_ptr: %lx read_ptr : %lx \n",
+	PRINTF("cbuffer: %lx buffer: %lx buffer_size: %d write_ptr: %lx read_ptr : %lx \n",
 		(long)cb, (long)&(cb->buffer[0]), cb->buffer_size, (long)cb->write_ptr,  (long)cb->read_ptr);
 }
 
@@ -106,7 +111,7 @@ void sm_dump(state_machine_t* sm)
 {
 	char* tf = (sm->read_suspended)? "TRUE": "FALSE";
 	
-	printf("state_machine : %lx read_fd: %d write_fd : %d read_suspended: %s cbuffer: %lx\n",
+	PRINTF("state_machine : %lx read_fd: %d write_fd : %d read_suspended: %s cbuffer: %lx\n",
 		(long)sm, sm->read_fd, sm->write_fd, tf, (long)&sm->cbuffer);
 }
 
@@ -121,6 +126,10 @@ void sm_init(state_machine_t* sm, int read_fd, int write_fd, size_t buffer_size)
     sm->read_suspended = false;
     cb_init( &(sm->cbuffer), buffer_size );
 }
+void sm_clean(state_machine_t* sm)
+{
+    cb_clean(&sm->cbuffer);
+}
 void sm_execute(state_machine_t* sm, fd_set* read_fds, fd_set* write_fds, int* status)
 {
     int w_avail;
@@ -132,7 +141,7 @@ void sm_execute(state_machine_t* sm, fd_set* read_fds, fd_set* write_fds, int* s
             //
             // TODO : do write and advance pointer what about EOF and io errors
             //
-            printf("state_machine sm: %lx write avail %d \n", (long)sm, w_avail);
+            PRINTF("state_machine sm: %lx write avail %d \n", (long)sm, w_avail);
             int n = (int)write(sm->write_fd, sm->cbuffer.write_ptr, w_avail);
             if( n == 0 ){
                 *status = SM_IOERR;
@@ -154,7 +163,7 @@ void sm_execute(state_machine_t* sm, fd_set* read_fds, fd_set* write_fds, int* s
             if( n == 0 ){
                 *status = SM_EOF;
             }else if( n > 0 ){
-                printf("state_machine sm: %lx read n: %d\n", (long)sm, n);
+                PRINTF("state_machine sm: %lx read n: %d\n", (long)sm, n);
                 cb_advance_read_ptr(&sm->cbuffer, n);
                 *status = SM_OK;
             }else{
@@ -163,7 +172,7 @@ void sm_execute(state_machine_t* sm, fd_set* read_fds, fd_set* write_fds, int* s
         }
     }
     if( *status != 0 ){
-		printf("sm: %ld exiting with status %d \n", (long)sm, *status);
+		PRINTF("sm: %ld exiting with status %d \n", (long)sm, *status);
         return;
 	}
     w_avail = cb_write_available(&sm->cbuffer);
@@ -186,7 +195,7 @@ void sm_execute(state_machine_t* sm, fd_set* read_fds, fd_set* write_fds, int* s
 
 void twc_dump(two_way_channel_t* twc)
 {
-	printf("twc: %lx fdA : %d fdB : %d sm_A2B: %lx sm_B2A: %lx\n",
+	PRINTF("twc: %lx fdA : %d fdB : %d sm_A2B: %lx sm_B2A: %lx\n",
 		(long)twc, twc->fdA, twc->fdB, (long)&twc->sm_A2B, (long)&twc->sm_B2A);
 }
 void twc_init(two_way_channel_t* twc, int fdA, int fdB, size_t buffer_size)
@@ -195,6 +204,11 @@ void twc_init(two_way_channel_t* twc, int fdA, int fdB, size_t buffer_size)
 	twc->fdB = fdB;
     sm_init(&twc->sm_A2B, fdA, fdB, buffer_size);
     sm_init(&twc->sm_B2A, fdB, fdA, buffer_size);
+}
+void twc_clean(two_way_channel_t* twc)
+{
+    sm_clean(&twc->sm_A2B);
+    sm_clean(&twc->sm_B2A);
 }
 void twc_run(two_way_channel_t* twc, int* status)
 {
@@ -234,11 +248,11 @@ void twc_run(two_way_channel_t* twc, int* status)
             sm_execute(&twc->sm_B2A, &read_fds, &write_fds, &statusB2A);
             
             if( statusA2B != SM_OK ){
-                printf("twc : %lx A2B exiting status: %d \n", (long)twc, statusA2B);
+                PRINTF("twc : %lx A2B exiting status: %d \n", (long)twc, statusA2B);
                 *status = statusA2B;
                 return;
             }else if( statusB2A != SM_OK ){
-                printf("twc : %lx B2A exiting status: %d \n", (long)twc, statusB2A);
+                PRINTF("twc : %lx B2A exiting status: %d \n", (long)twc, statusB2A);
                 *status = statusB2A;
                 return;
             }else{

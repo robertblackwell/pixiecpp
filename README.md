@@ -13,7 +13,7 @@ using a mickey-mouse protocol that I call "BLK".
 This particular implementation is using cpp and threads. Thus there is a listener thread and a thread for each active connection.
 
 For the "tunnel" feature I initially used blocking I/O and added an additional thread to each connection and used a separate
-thread for each direction. That is "tunnel" connections had two threads one handing ```client ---> server``` and the otehr handling
+thread for each direction. That is "tunnel" connections had two threads one handing ```client ---> server``` and the other handling
 ```server-->client``` traffic.
 
 However this did not work very well as I kept getting EAGAIN errors on the sockets. This is most likely a bug in my code
@@ -26,3 +26,5 @@ all activity on the connections sockets are __"single threaded"__. This implemen
 to do a lot more testing before calling it done.
 
 Incidentally the select implementation is available in my githyb repo __twc__.
+
+Finally my repo __pixiejs__ is a test harness for this project. 

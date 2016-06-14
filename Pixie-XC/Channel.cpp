@@ -154,6 +154,7 @@ void RawTwoWayChannel::start()
 
     twc_init(&twc, socketHandleClient, socketHandleServer, 10000);
     twc_run(&twc, &status);
+    twc_clean(&twc);
     
     socket_set_blocking(socketHandleServer);
     socket_set_blocking(socketHandleClient);
