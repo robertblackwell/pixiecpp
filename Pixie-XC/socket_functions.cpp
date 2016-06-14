@@ -224,6 +224,7 @@ ok:
         *status = errno;
         return 0;
     }
+    *status = 0;
     return sockfd;
 }
 bool    socket_is_blocking(socket_handle_t socket)

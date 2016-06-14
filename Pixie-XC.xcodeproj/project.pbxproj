@@ -47,6 +47,8 @@
 		D44BBFCE1D0CB8F200E4871C /* BlkClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D44BBFC41D0CB6D300E4871C /* BlkClient.cpp */; };
 		D45587EB1D0E4261009C6095 /* ConnectionPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D45587E91D0E4261009C6095 /* ConnectionPool.cpp */; };
 		D45587EC1D0E4389009C6095 /* ConnectionPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D45587E91D0E4261009C6095 /* ConnectionPool.cpp */; };
+		D4BE090E1D10698D00954C05 /* twc.c in Sources */ = {isa = PBXBuildFile; fileRef = D4BE090C1D10698D00954C05 /* twc.c */; };
+		D4BE090F1D1070B900954C05 /* twc.c in Sources */ = {isa = PBXBuildFile; fileRef = D4BE090C1D10698D00954C05 /* twc.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -121,6 +123,8 @@
 		D44BBFC51D0CB6D300E4871C /* BlkClient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BlkClient.hpp; sourceTree = "<group>"; };
 		D45587E91D0E4261009C6095 /* ConnectionPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConnectionPool.cpp; sourceTree = "<group>"; };
 		D45587EA1D0E4261009C6095 /* ConnectionPool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ConnectionPool.hpp; sourceTree = "<group>"; };
+		D4BE090C1D10698D00954C05 /* twc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = twc.c; sourceTree = "<group>"; };
+		D4BE090D1D10698D00954C05 /* twc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twc.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +207,8 @@
 				D42631AF1C400F5D00727699 /* Statistics.cpp */,
 				D437DE801C3075070090E443 /* Thread.h */,
 				D437DE7F1C3075070090E443 /* Thread.cpp */,
+				D4BE090D1D10698D00954C05 /* twc.h */,
+				D4BE090C1D10698D00954C05 /* twc.c */,
 				D437DE771C304A800090E443 /* Worker.h */,
 				D437DE761C304A800090E443 /* Worker.cpp */,
 				D42631A71C3FFFC900727699 /* WorkerLoop.h */,
@@ -336,6 +342,7 @@
 				D41D46021C387A9E00C2D339 /* Exception.cpp in Sources */,
 				D42631A81C3FFFC900727699 /* WorkerLoop.cpp in Sources */,
 				D42631B11C400F5D00727699 /* Statistics.cpp in Sources */,
+				D4BE090E1D10698D00954C05 /* twc.c in Sources */,
 				D42631AB1C400C9800727699 /* BlkSocket.cpp in Sources */,
 				D437DE711C3045D50090E443 /* Queue.cpp in Sources */,
 				D44BBFB31D0CA45600E4871C /* BlkMessage.cpp in Sources */,
@@ -359,6 +366,7 @@
 				D44AAB521D0CEB8E0055BBD7 /* Handler.cpp in Sources */,
 				D44AAB531D0CEB920055BBD7 /* Listener.cpp in Sources */,
 				D44AAB541D0CEB940055BBD7 /* Monitor.cpp in Sources */,
+				D4BE090F1D1070B900954C05 /* twc.c in Sources */,
 				D44AAB551D0CEB980055BBD7 /* Queue.cpp in Sources */,
 				D44AAB561D0CEB9A0055BBD7 /* Server.cpp in Sources */,
 				D44AAB581D0CEBA10055BBD7 /* Statistics.cpp in Sources */,

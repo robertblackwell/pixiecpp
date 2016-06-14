@@ -20,6 +20,7 @@
 #include "ConnectionPool.hpp"
 
 
+
 // TODO: need to break this out into a separate class, one for each proxy protocol
 // Applies the rules for turning a proxied request into a final request.
 // very simple for the BLK protocol
@@ -100,12 +101,8 @@ void Handler::tunnelBlkProxy(BlkMessage& msg)
     int status;
     char*   host = "localhost";
     int upstreamPort = msg.destination_port;
-#define CONNECTION_POOL
-#ifndef CONNECTION_POOL
     int upstreamRawSocket = socket_connect_host_port(host,upstreamPort,&status);
-#else
-    int upstreamRawSocket = ConnectionPool::acquire(upstreamPort);
-#endif
+
     socket_set_timeout(upstreamRawSocket, 5);
     socket_set_timeout(socket_fd, 5);
     
@@ -123,7 +120,7 @@ void Handler::tunnelBlkProxy(BlkMessage& msg)
     if( status == SOCKET_STATUS_GOOD ){
         
         myMessageSocket.writeMessage(okMessage, status);
-        if( status == BLK_WRITE_STATUS_OK){    
+        if( status == BLK_WRITE_STATUS_OK){
             RawTwoWayChannel  channel{socket_fd, upstreamRawSocket};
             channel.start();
         }else{
@@ -137,7 +134,6 @@ void Handler::tunnelBlkProxy(BlkMessage& msg)
         << " downStreamsocket: " << socket_fd << " status: " << status << std::endl;
         exit(1);
     }
-    ConnectionPool::release(upstreamRawSocket);
 //    socket_close(upstreamRawSocket);
 //    socket_close(socket_fd);
 }

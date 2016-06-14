@@ -16,6 +16,7 @@
 #include "BlkSocket.h"
 #include "BlkClient.hpp"
 #include "Channel.hpp"
+#include "twc.h"
 
 #pragma mark - implementation of raw channel
 /**
@@ -143,6 +144,24 @@ RawTwoWayChannel::RawTwoWayChannel(int _socketHandleClient, int _socketHandleSer
 
 void RawTwoWayChannel::start()
 {
+#define GGGG
+#ifdef GGGG
+    int     status;
+    two_way_channel_t   twc;
+    
+    socket_set_non_blocking(socketHandleServer);
+    socket_set_non_blocking(socketHandleClient);
+
+    twc_init(&twc, socketHandleClient, socketHandleServer, 10000);
+    twc_run(&twc, &status);
+    
+    socket_set_blocking(socketHandleServer);
+    socket_set_blocking(socketHandleClient);
+
+    socket_close(socketHandleClient);
+    socket_close(socketHandleServer);
+
+#else
     bool    terminateFlag;
     
     channelUpStream.startThread(&terminateFlag);
@@ -155,6 +174,6 @@ void RawTwoWayChannel::start()
     pthread_join(channelUpStream.pthread, NULL);
 
     LOG(DEBUG) << "after waiting for sub thread   " <<  std::endl;
-    
+#endif
 }
 
