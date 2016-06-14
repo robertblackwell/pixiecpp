@@ -14,53 +14,13 @@
 #include "BlkMessage.h"
 #include "BlkSocket.h"
 
-#pragma mark - implementation of raw channel
-/**
- * --------------------------------------------------------------------------------------------
- */
-class RawOneWayChannel
-{
-public:
-    int         readSocket;
-    int         writeSocket;
-    int         exitStatus;
-    
-    RawOneWayChannel(int _readSocket, int writeSocket);
-    void startChannel(bool* terminateFlag);
-    void run(int count, std::string message, bool* terminateFlag);
-    
-};
-
-
-/**
- * --------------------------------------------------------------------------------------------
- */
-
-class RawOneWayThreadedChannel: public Thread, public RawOneWayChannel
-{
-public:
-    pthread_t   thread;
-    bool        *terminateFlag;
-    
-    RawOneWayThreadedChannel(int _readSocket, int _writeSocket);
-    void startThread(bool*  _terminateFlag);
-    void main();
-};
-
-
-/**
- * --------------------------------------------------------------------------------------------
- */
 
 
 class RawTwoWayChannel
 {
 public:
-    int                         socketHandleClient;
-    RawOneWayThreadedChannel    channelUpStream;
-    
+    int                         socketHandleClient;    
     int                         socketHandleServer;
-    RawOneWayChannel            channelDownStream;
     
     RawTwoWayChannel(int _socketHandleClient, int _socketHandleServer);
     void start();
