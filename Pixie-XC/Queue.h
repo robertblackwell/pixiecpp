@@ -5,6 +5,10 @@
 //  Created by ROBERT BLACKWELL on 12/27/15.
 //  Copyright © 2015 Blackwellapps. All rights reserved.
 //
+
+#ifndef QUEUE_H
+#define QUEUE_H
+
 #include <iostream>
 #include <deque>
 #include <cstdlib>
@@ -25,3 +29,5 @@ class Queue
     int remove();
     void add(int a);
 };
+
+#endif

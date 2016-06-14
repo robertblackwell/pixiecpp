@@ -7,20 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D41BECFB1D0E2D610070AD36 /* Channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D41BECFA1D0E2D610070AD36 /* Channel.cpp */; };
+		D41BECFC1D0E311D0070AD36 /* Channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D41BECFA1D0E2D610070AD36 /* Channel.cpp */; };
 		D41D45F61C35DF3B00C2D339 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D41D45F41C35DF3B00C2D339 /* Server.cpp */; };
 		D41D45FF1C380C5100C2D339 /* socket_functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D41D45FD1C380C5100C2D339 /* socket_functions.cpp */; };
 		D41D46021C387A9E00C2D339 /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D41D46001C387A9E00C2D339 /* Exception.cpp */; };
 		D42631A81C3FFFC900727699 /* WorkerLoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42631A61C3FFFC900727699 /* WorkerLoop.cpp */; };
-		D42631AB1C400C9800727699 /* MsgSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42631A91C400C9800727699 /* MsgSocket.cpp */; };
-		D42631AE1C400D2600727699 /* Message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42631AC1C400D2600727699 /* Message.cpp */; };
+		D42631AB1C400C9800727699 /* BlkSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42631A91C400C9800727699 /* BlkSocket.cpp */; };
 		D42631B11C400F5D00727699 /* Statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42631AF1C400F5D00727699 /* Statistics.cpp */; };
-		D42631B41C4011E600727699 /* SocketHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42631B21C4011E600727699 /* SocketHandler.cpp */; };
 		D437DE711C3045D50090E443 /* Queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D437DE701C3045D50090E443 /* Queue.cpp */; };
 		D437DE751C3047590090E443 /* Listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D437DE731C3047590090E443 /* Listener.cpp */; };
 		D437DE781C304A800090E443 /* Worker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D437DE761C304A800090E443 /* Worker.cpp */; };
 		D437DE7A1C304D0E0090E443 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D437DE791C304D0E0090E443 /* main.cpp */; };
 		D437DE811C3075070090E443 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D437DE7F1C3075070090E443 /* Thread.cpp */; };
 		D437DE841C3087230090E443 /* Monitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D437DE821C3087230090E443 /* Monitor.cpp */; };
+		D44AAB421D0CDF870055BBD7 /* BlkClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D44BBFC41D0CB6D300E4871C /* BlkClient.cpp */; };
+		D44AAB4A1D0CEAFE0055BBD7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D44AAB491D0CEAFE0055BBD7 /* main.cpp */; };
+		D44AAB4E1D0CEB810055BBD7 /* BlkClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D44BBFC41D0CB6D300E4871C /* BlkClient.cpp */; };
+		D44AAB4F1D0CEB830055BBD7 /* BlkMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D44BBFB11D0CA45600E4871C /* BlkMessage.cpp */; };
+		D44AAB501D0CEB870055BBD7 /* BlkSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42631A91C400C9800727699 /* BlkSocket.cpp */; };
+		D44AAB511D0CEB8A0055BBD7 /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D41D46001C387A9E00C2D339 /* Exception.cpp */; };
+		D44AAB521D0CEB8E0055BBD7 /* Handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D44BBFB51D0CAC3000E4871C /* Handler.cpp */; };
+		D44AAB531D0CEB920055BBD7 /* Listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D437DE731C3047590090E443 /* Listener.cpp */; };
+		D44AAB541D0CEB940055BBD7 /* Monitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D437DE821C3087230090E443 /* Monitor.cpp */; };
+		D44AAB551D0CEB980055BBD7 /* Queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D437DE701C3045D50090E443 /* Queue.cpp */; };
+		D44AAB561D0CEB9A0055BBD7 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D41D45F41C35DF3B00C2D339 /* Server.cpp */; };
+		D44AAB571D0CEB9D0055BBD7 /* socket_functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D41D45FD1C380C5100C2D339 /* socket_functions.cpp */; };
+		D44AAB581D0CEBA10055BBD7 /* Statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42631AF1C400F5D00727699 /* Statistics.cpp */; };
+		D44AAB591D0CEBA40055BBD7 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D437DE7F1C3075070090E443 /* Thread.cpp */; };
+		D44AAB5A1D0CEBA70055BBD7 /* Worker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D437DE761C304A800090E443 /* Worker.cpp */; };
+		D44BBFB31D0CA45600E4871C /* BlkMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D44BBFB11D0CA45600E4871C /* BlkMessage.cpp */; };
+		D44BBFB81D0CAC3000E4871C /* Handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D44BBFB51D0CAC3000E4871C /* Handler.cpp */; };
+		D44BBFC01D0CB63400E4871C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D44BBFBF1D0CB63400E4871C /* main.cpp */; };
+		D44BBFC81D0CB7F500E4871C /* BlkMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D44BBFB11D0CA45600E4871C /* BlkMessage.cpp */; };
+		D44BBFC91D0CB7F800E4871C /* BlkSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42631A91C400C9800727699 /* BlkSocket.cpp */; };
+		D44BBFCA1D0CB7FB00E4871C /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D41D46001C387A9E00C2D339 /* Exception.cpp */; };
+		D44BBFCB1D0CB7FF00E4871C /* Handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D44BBFB51D0CAC3000E4871C /* Handler.cpp */; };
+		D44BBFCD1D0CB80F00E4871C /* socket_functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D41D45FD1C380C5100C2D339 /* socket_functions.cpp */; };
+		D44BBFCE1D0CB8F200E4871C /* BlkClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D44BBFC41D0CB6D300E4871C /* BlkClient.cpp */; };
+		D45587EB1D0E4261009C6095 /* ConnectionPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D45587E91D0E4261009C6095 /* ConnectionPool.cpp */; };
+		D45587EC1D0E4389009C6095 /* ConnectionPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D45587E91D0E4261009C6095 /* ConnectionPool.cpp */; };
+		D4BE090E1D10698D00954C05 /* twc.c in Sources */ = {isa = PBXBuildFile; fileRef = D4BE090C1D10698D00954C05 /* twc.c */; };
+		D4BE090F1D1070B900954C05 /* twc.c in Sources */ = {isa = PBXBuildFile; fileRef = D4BE090C1D10698D00954C05 /* twc.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,9 +61,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		D44AAB451D0CEAFE0055BBD7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		D44BBFBB1D0CB63400E4871C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D41BECF91D0E2D360070AD36 /* Channel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Channel.hpp; sourceTree = "<group>"; };
+		D41BECFA1D0E2D610070AD36 /* Channel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Channel.cpp; sourceTree = "<group>"; };
 		D41D45F41C35DF3B00C2D339 /* Server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Server.cpp; sourceTree = "<group>"; };
 		D41D45F51C35DF3B00C2D339 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		D41D45FD1C380C5100C2D339 /* socket_functions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = socket_functions.cpp; sourceTree = "<group>"; };
@@ -44,14 +92,10 @@
 		D41D46011C387A9E00C2D339 /* Exception.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Exception.hpp; sourceTree = "<group>"; };
 		D42631A61C3FFFC900727699 /* WorkerLoop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorkerLoop.cpp; sourceTree = "<group>"; };
 		D42631A71C3FFFC900727699 /* WorkerLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkerLoop.h; sourceTree = "<group>"; };
-		D42631A91C400C9800727699 /* MsgSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MsgSocket.cpp; sourceTree = "<group>"; };
-		D42631AA1C400C9800727699 /* MsgSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgSocket.h; sourceTree = "<group>"; };
-		D42631AC1C400D2600727699 /* Message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Message.cpp; sourceTree = "<group>"; };
-		D42631AD1C400D2600727699 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		D42631A91C400C9800727699 /* BlkSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BlkSocket.cpp; sourceTree = "<group>"; };
+		D42631AA1C400C9800727699 /* BlkSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlkSocket.h; sourceTree = "<group>"; };
 		D42631AF1C400F5D00727699 /* Statistics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Statistics.cpp; sourceTree = "<group>"; };
 		D42631B01C400F5D00727699 /* Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statistics.h; sourceTree = "<group>"; };
-		D42631B21C4011E600727699 /* SocketHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketHandler.cpp; sourceTree = "<group>"; };
-		D42631B31C4011E600727699 /* SocketHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketHandler.hpp; sourceTree = "<group>"; };
 		D437DE661C2FD7660090E443 /* Pixie-XC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Pixie-XC"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D437DE701C3045D50090E443 /* Queue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Queue.cpp; sourceTree = "<group>"; };
 		D437DE721C3046600090E443 /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
@@ -65,10 +109,40 @@
 		D437DE801C3075070090E443 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
 		D437DE821C3087230090E443 /* Monitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Monitor.cpp; sourceTree = "<group>"; };
 		D437DE831C3087230090E443 /* Monitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monitor.h; sourceTree = "<group>"; };
+		D44AAB471D0CEAFE0055BBD7 /* mitm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mitm; sourceTree = BUILT_PRODUCTS_DIR; };
+		D44AAB491D0CEAFE0055BBD7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D44BBFB11D0CA45600E4871C /* BlkMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BlkMessage.cpp; sourceTree = "<group>"; };
+		D44BBFB21D0CA45600E4871C /* BlkMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlkMessage.h; sourceTree = "<group>"; };
+		D44BBFB41D0CAC3000E4871C /* ErrorCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorCodes.h; sourceTree = "<group>"; };
+		D44BBFB51D0CAC3000E4871C /* Handler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Handler.cpp; sourceTree = "<group>"; };
+		D44BBFB61D0CAC3000E4871C /* Handler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Handler.hpp; sourceTree = "<group>"; };
+		D44BBFB71D0CAC3000E4871C /* Protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Protocol.h; sourceTree = "<group>"; };
+		D44BBFBD1D0CB63400E4871C /* blk_client */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = blk_client; sourceTree = BUILT_PRODUCTS_DIR; };
+		D44BBFBF1D0CB63400E4871C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D44BBFC41D0CB6D300E4871C /* BlkClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BlkClient.cpp; sourceTree = "<group>"; };
+		D44BBFC51D0CB6D300E4871C /* BlkClient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BlkClient.hpp; sourceTree = "<group>"; };
+		D45587E91D0E4261009C6095 /* ConnectionPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConnectionPool.cpp; sourceTree = "<group>"; };
+		D45587EA1D0E4261009C6095 /* ConnectionPool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ConnectionPool.hpp; sourceTree = "<group>"; };
+		D4BE090C1D10698D00954C05 /* twc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = twc.c; sourceTree = "<group>"; };
+		D4BE090D1D10698D00954C05 /* twc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twc.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D437DE631C2FD7660090E443 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D44AAB441D0CEAFE0055BBD7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D44BBFBA1D0CB63400E4871C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -82,6 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				D437DE681C2FD7660090E443 /* Pixie-XC */,
+				D44BBFBE1D0CB63400E4871C /* blk_client */,
+				D44AAB481D0CEAFE0055BBD7 /* mitm */,
 				D437DE671C2FD7660090E443 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				D437DE661C2FD7660090E443 /* Pixie-XC */,
+				D44BBFBD1D0CB63400E4871C /* blk_client */,
+				D44AAB471D0CEAFE0055BBD7 /* mitm */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,35 +176,61 @@
 			isa = PBXGroup;
 			children = (
 				D437DE791C304D0E0090E443 /* main.cpp */,
-				D41D45FE1C380C5100C2D339 /* socket_functions.hpp */,
-				D41D45FD1C380C5100C2D339 /* socket_functions.cpp */,
+				D44BBFC51D0CB6D300E4871C /* BlkClient.hpp */,
+				D44BBFC41D0CB6D300E4871C /* BlkClient.cpp */,
+				D44BBFB21D0CA45600E4871C /* BlkMessage.h */,
+				D44BBFB11D0CA45600E4871C /* BlkMessage.cpp */,
+				D42631AA1C400C9800727699 /* BlkSocket.h */,
+				D42631A91C400C9800727699 /* BlkSocket.cpp */,
+				D41BECF91D0E2D360070AD36 /* Channel.hpp */,
+				D41BECFA1D0E2D610070AD36 /* Channel.cpp */,
+				D45587EA1D0E4261009C6095 /* ConnectionPool.hpp */,
+				D45587E91D0E4261009C6095 /* ConnectionPool.cpp */,
 				D41D46011C387A9E00C2D339 /* Exception.hpp */,
 				D41D46001C387A9E00C2D339 /* Exception.cpp */,
-				D41D45F51C35DF3B00C2D339 /* Server.h */,
-				D41D45F41C35DF3B00C2D339 /* Server.cpp */,
+				D44BBFB41D0CAC3000E4871C /* ErrorCodes.h */,
+				D44BBFB61D0CAC3000E4871C /* Handler.hpp */,
+				D44BBFB51D0CAC3000E4871C /* Handler.cpp */,
+				D437DE741C3047590090E443 /* Listener.h */,
+				D437DE731C3047590090E443 /* Listener.cpp */,
 				D437DE7B1C3051940090E443 /* Logger.h */,
 				D437DE831C3087230090E443 /* Monitor.h */,
 				D437DE821C3087230090E443 /* Monitor.cpp */,
-				D437DE771C304A800090E443 /* Worker.h */,
-				D437DE761C304A800090E443 /* Worker.cpp */,
-				D42631B31C4011E600727699 /* SocketHandler.hpp */,
-				D42631B21C4011E600727699 /* SocketHandler.cpp */,
-				D42631B01C400F5D00727699 /* Statistics.h */,
-				D42631AF1C400F5D00727699 /* Statistics.cpp */,
-				D42631AA1C400C9800727699 /* MsgSocket.h */,
-				D42631A91C400C9800727699 /* MsgSocket.cpp */,
-				D42631AD1C400D2600727699 /* Message.h */,
-				D42631AC1C400D2600727699 /* Message.cpp */,
-				D42631A71C3FFFC900727699 /* WorkerLoop.h */,
-				D42631A61C3FFFC900727699 /* WorkerLoop.cpp */,
-				D437DE741C3047590090E443 /* Listener.h */,
-				D437DE731C3047590090E443 /* Listener.cpp */,
-				D437DE801C3075070090E443 /* Thread.h */,
-				D437DE7F1C3075070090E443 /* Thread.cpp */,
+				D44BBFB71D0CAC3000E4871C /* Protocol.h */,
 				D437DE721C3046600090E443 /* Queue.h */,
 				D437DE701C3045D50090E443 /* Queue.cpp */,
+				D41D45F51C35DF3B00C2D339 /* Server.h */,
+				D41D45F41C35DF3B00C2D339 /* Server.cpp */,
+				D41D45FE1C380C5100C2D339 /* socket_functions.hpp */,
+				D41D45FD1C380C5100C2D339 /* socket_functions.cpp */,
+				D42631B01C400F5D00727699 /* Statistics.h */,
+				D42631AF1C400F5D00727699 /* Statistics.cpp */,
+				D437DE801C3075070090E443 /* Thread.h */,
+				D437DE7F1C3075070090E443 /* Thread.cpp */,
+				D4BE090D1D10698D00954C05 /* twc.h */,
+				D4BE090C1D10698D00954C05 /* twc.c */,
+				D437DE771C304A800090E443 /* Worker.h */,
+				D437DE761C304A800090E443 /* Worker.cpp */,
+				D42631A71C3FFFC900727699 /* WorkerLoop.h */,
+				D42631A61C3FFFC900727699 /* WorkerLoop.cpp */,
 			);
 			path = "Pixie-XC";
+			sourceTree = "<group>";
+		};
+		D44AAB481D0CEAFE0055BBD7 /* mitm */ = {
+			isa = PBXGroup;
+			children = (
+				D44AAB491D0CEAFE0055BBD7 /* main.cpp */,
+			);
+			path = mitm;
+			sourceTree = "<group>";
+		};
+		D44BBFBE1D0CB63400E4871C /* blk_client */ = {
+			isa = PBXGroup;
+			children = (
+				D44BBFBF1D0CB63400E4871C /* main.cpp */,
+			);
+			path = blk_client;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +253,40 @@
 			productReference = D437DE661C2FD7660090E443 /* Pixie-XC */;
 			productType = "com.apple.product-type.tool";
 		};
+		D44AAB461D0CEAFE0055BBD7 /* mitm */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D44AAB4B1D0CEAFE0055BBD7 /* Build configuration list for PBXNativeTarget "mitm" */;
+			buildPhases = (
+				D44AAB431D0CEAFE0055BBD7 /* Sources */,
+				D44AAB441D0CEAFE0055BBD7 /* Frameworks */,
+				D44AAB451D0CEAFE0055BBD7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = mitm;
+			productName = mitm;
+			productReference = D44AAB471D0CEAFE0055BBD7 /* mitm */;
+			productType = "com.apple.product-type.tool";
+		};
+		D44BBFBC1D0CB63400E4871C /* blk_client */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D44BBFC11D0CB63400E4871C /* Build configuration list for PBXNativeTarget "blk_client" */;
+			buildPhases = (
+				D44BBFB91D0CB63400E4871C /* Sources */,
+				D44BBFBA1D0CB63400E4871C /* Frameworks */,
+				D44BBFBB1D0CB63400E4871C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = blk_client;
+			productName = blk_client;
+			productReference = D44BBFBD1D0CB63400E4871C /* blk_client */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -160,6 +298,12 @@
 				TargetAttributes = {
 					D437DE651C2FD7660090E443 = {
 						CreatedOnToolsVersion = 7.2;
+					};
+					D44AAB461D0CEAFE0055BBD7 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					D44BBFBC1D0CB63400E4871C = {
+						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
 			};
@@ -176,6 +320,8 @@
 			projectRoot = "";
 			targets = (
 				D437DE651C2FD7660090E443 /* Pixie-XC */,
+				D44BBFBC1D0CB63400E4871C /* blk_client */,
+				D44AAB461D0CEAFE0055BBD7 /* mitm */,
 			);
 		};
 /* End PBXProject section */
@@ -185,20 +331,62 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D437DE7A1C304D0E0090E443 /* main.cpp in Sources */,
+				D44AAB421D0CDF870055BBD7 /* BlkClient.cpp in Sources */,
 				D437DE781C304A800090E443 /* Worker.cpp in Sources */,
-				D42631AE1C400D2600727699 /* Message.cpp in Sources */,
 				D437DE841C3087230090E443 /* Monitor.cpp in Sources */,
 				D41D45F61C35DF3B00C2D339 /* Server.cpp in Sources */,
+				D41BECFB1D0E2D610070AD36 /* Channel.cpp in Sources */,
 				D437DE751C3047590090E443 /* Listener.cpp in Sources */,
+				D44BBFB81D0CAC3000E4871C /* Handler.cpp in Sources */,
 				D41D46021C387A9E00C2D339 /* Exception.cpp in Sources */,
 				D42631A81C3FFFC900727699 /* WorkerLoop.cpp in Sources */,
-				D42631B41C4011E600727699 /* SocketHandler.cpp in Sources */,
 				D42631B11C400F5D00727699 /* Statistics.cpp in Sources */,
-				D437DE7A1C304D0E0090E443 /* main.cpp in Sources */,
-				D42631AB1C400C9800727699 /* MsgSocket.cpp in Sources */,
+				D4BE090E1D10698D00954C05 /* twc.c in Sources */,
+				D42631AB1C400C9800727699 /* BlkSocket.cpp in Sources */,
 				D437DE711C3045D50090E443 /* Queue.cpp in Sources */,
+				D44BBFB31D0CA45600E4871C /* BlkMessage.cpp in Sources */,
 				D41D45FF1C380C5100C2D339 /* socket_functions.cpp in Sources */,
+				D45587EB1D0E4261009C6095 /* ConnectionPool.cpp in Sources */,
 				D437DE811C3075070090E443 /* Thread.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D44AAB431D0CEAFE0055BBD7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D44AAB4A1D0CEAFE0055BBD7 /* main.cpp in Sources */,
+				D41BECFC1D0E311D0070AD36 /* Channel.cpp in Sources */,
+				D44AAB4E1D0CEB810055BBD7 /* BlkClient.cpp in Sources */,
+				D44AAB4F1D0CEB830055BBD7 /* BlkMessage.cpp in Sources */,
+				D44AAB501D0CEB870055BBD7 /* BlkSocket.cpp in Sources */,
+				D45587EC1D0E4389009C6095 /* ConnectionPool.cpp in Sources */,
+				D44AAB511D0CEB8A0055BBD7 /* Exception.cpp in Sources */,
+				D44AAB521D0CEB8E0055BBD7 /* Handler.cpp in Sources */,
+				D44AAB531D0CEB920055BBD7 /* Listener.cpp in Sources */,
+				D44AAB541D0CEB940055BBD7 /* Monitor.cpp in Sources */,
+				D4BE090F1D1070B900954C05 /* twc.c in Sources */,
+				D44AAB551D0CEB980055BBD7 /* Queue.cpp in Sources */,
+				D44AAB561D0CEB9A0055BBD7 /* Server.cpp in Sources */,
+				D44AAB581D0CEBA10055BBD7 /* Statistics.cpp in Sources */,
+				D44AAB571D0CEB9D0055BBD7 /* socket_functions.cpp in Sources */,
+				D44AAB591D0CEBA40055BBD7 /* Thread.cpp in Sources */,
+				D44AAB5A1D0CEBA70055BBD7 /* Worker.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D44BBFB91D0CB63400E4871C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D44BBFCB1D0CB7FF00E4871C /* Handler.cpp in Sources */,
+				D44BBFC01D0CB63400E4871C /* main.cpp in Sources */,
+				D44BBFC81D0CB7F500E4871C /* BlkMessage.cpp in Sources */,
+				D44BBFC91D0CB7F800E4871C /* BlkSocket.cpp in Sources */,
+				D44BBFCA1D0CB7FB00E4871C /* Exception.cpp in Sources */,
+				D44BBFCD1D0CB80F00E4871C /* socket_functions.cpp in Sources */,
+				D44BBFCE1D0CB8F200E4871C /* BlkClient.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +488,44 @@
 			};
 			name = Release;
 		};
+		D44AAB4C1D0CEAFE0055BBD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/include";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D44AAB4D1D0CEAFE0055BBD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		D44BBFC21D0CB63400E4871C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/include";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D44BBFC31D0CB63400E4871C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -317,6 +543,24 @@
 			buildConfigurations = (
 				D437DE6E1C2FD7660090E443 /* Debug */,
 				D437DE6F1C2FD7660090E443 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D44AAB4B1D0CEAFE0055BBD7 /* Build configuration list for PBXNativeTarget "mitm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D44AAB4C1D0CEAFE0055BBD7 /* Debug */,
+				D44AAB4D1D0CEAFE0055BBD7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D44BBFC11D0CB63400E4871C /* Build configuration list for PBXNativeTarget "blk_client" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D44BBFC21D0CB63400E4871C /* Debug */,
+				D44BBFC31D0CB63400E4871C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

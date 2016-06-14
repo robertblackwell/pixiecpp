@@ -26,12 +26,10 @@
 
 void socket_throw_error(socket_handle_t socket, int errorno, std::string message)
 {
-    char* msg;
     const char* m = message.c_str();
     int eno = (int) errorno;
     int socket_fd = (int) socket;
-    printf(" SocketError[%s ], errno:%d (%s)  socket_fd: %d", m, eno, strerror(errorno), socket_fd );
-    asprintf(&msg, " SocketError[%s ], errno:%d  socket_fd: %d", m, eno, socket_fd );
+    fprintf(stderr, " SocketError[%s ], errno:%d (%s)  socket_fd: %d", m, eno, strerror(errorno), socket_fd );
     
     //throw std::runtime_error(msg);
 }
@@ -67,7 +65,8 @@ socket_handle_t socket_create_listener_on_port(int port)
     sin.sin_len = sizeof(sin);
     sin.sin_family = AF_INET; // or AF_INET6 (address family)
     sin.sin_port = htons(port);
-    sin.sin_addr.s_addr= INADDR_ANY;
+//    sin.sin_addr.s_addr= INADDR_ANY;
+    sin.sin_addr.s_addr = inet_addr("127.0.0.1");
     int result;
     int yes = 1;
     if( (result = setsockopt(tmp_socket, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes))) != 0 )
@@ -93,7 +92,7 @@ socket_handle_t socket_create_listener_on_port(int port)
 //
 // Uses conditional compilation to include/exclude code to handle ipv6
 //
-socket_handle_t socket_connect_host_port( char* hostname, unsigned short port )
+socket_handle_t socket_connect_host_port( char* hostname, unsigned short port, int* status )
 {
 #ifdef USE_IPV6
     struct addrinfo hints;
@@ -119,9 +118,11 @@ socket_handle_t socket_connect_host_port( char* hostname, unsigned short port )
     hints.ai_family = PF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
     (void) snprintf( portstr, sizeof(portstr), "%d", (int) port );
-    if ( (gaierr = getaddrinfo( hostname, portstr, &hints, &ai )) != 0 )
-        socket_send_error( 404, "Not Found", (char*) 0, "Unknown host." );
-    
+    if ( (gaierr = getaddrinfo( hostname, portstr, &hints, &ai )) != 0 ){
+        socket_throw_error(0, errno, "getaddrinfo failed");
+        *status = errno;
+        return 0;
+    }
     /* Find the first IPv4 and IPv6 entries. */
     aiv4 = (struct addrinfo*) 0;
     aiv6 = (struct addrinfo*) 0;
@@ -176,7 +177,7 @@ socket_handle_t socket_connect_host_port( char* hostname, unsigned short port )
         goto ok;
     }
     
-    socket_send_error( 404, "Not Found", (char*) 0, "Unknown host." );
+    socket_throw_error(sockfd, errno, "Unknown host." );
     
 ok:
     freeaddrinfo( ai );
@@ -184,8 +185,12 @@ ok:
 #else /* USE_IPV6 */
     
     he = gethostbyname( hostname );
-    if ( he == (struct hostent*) 0 )
-        socket_send_error( 404, "Not Found", (char*) 0, "Unknown host." );
+    if ( he == (struct hostent*) 0 ){
+        printf("ERROR gethostname %d %s\n", errno, strerror(errno));
+        socket_throw_error(sockfd, errno,   "Unknown host." );
+        *status = errno;
+        return 0;
+    }
     sock_family = sa.sin_family = he->h_addrtype;
     sock_type = SOCK_STREAM;
     sock_protocol = 0;
@@ -196,16 +201,56 @@ ok:
 #endif /* USE_IPV6 */
     
     sockfd = socket( sock_family, sock_type, sock_protocol );
-    if ( sockfd < 0 )
-        socket_send_error( 500, "Internal Error", (char*) 0, "Couldn't create socket." );
+    if ( sockfd < 0 ){
+        printf("ERROR socket %d %s\n", errno, strerror(errno));
+        socket_throw_error(sockfd, errno,  "socket call refused." );
+        *status = errno;
+        return 0;
+    }
+//    int result;
+//    int yes = 1;
+//    if( (result = setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes))) != 0 )
+//    {
+//        printf("ERROR setsockoptt %d %s\n", errno, strerror(errno));
+//        socket_throw_error(sockfd, errno, "the setsockopt failed %d");
+//    }
 
     int value = 1;
     setsockopt(sockfd, SOL_SOCKET, SO_NOSIGPIPE, &value, sizeof(value));
 
-    if ( connect( sockfd, (struct sockaddr*) &sa, sa_len ) < 0 )
-        socket_send_error( 503, "Service Unavailable", (char*) 0, "Connection refused." );
-    
+    if ( connect( sockfd, (struct sockaddr*) &sa, sa_len ) < 0 ){
+        printf("ERROR connect %d %s\n", errno, strerror(errno));
+        socket_throw_error(sockfd, errno,  "Connection refused." );
+        *status = errno;
+        return 0;
+    }
+    *status = 0;
     return sockfd;
+}
+bool    socket_is_blocking(socket_handle_t socket)
+{
+    int     val;
+    bool    is_blocking = false;
+    int junk = O_NONBLOCK;
+    int tmp;
+    int tmp2;
+    
+    if ( (val = fcntl(socket, F_GETFL, 0)) < 0)
+    {
+        socket_throw_error(socket, errno,  "FCNTL failed" );
+    }
+    else
+    {
+        int t1 = 0x0004;
+        int t2 = 0xFFF2;
+        int t3 = t1 & t2;
+        int t4 = ! t3;
+        
+        tmp = (val & O_NONBLOCK);
+        tmp2 = ! tmp;
+        is_blocking = !(val & O_NONBLOCK);
+    }
+    return is_blocking;
 }
 
 socket_handle_t socket_set_blocking(socket_handle_t socket)
@@ -311,7 +356,6 @@ void socket_wait_for_write_flush(socket_handle_t socket)
 bool socket_write_data(socket_handle_t socket,  void* buffer, int buffer_length, int* status)
 {
     int res = (int)write(socket, buffer, buffer_length);
-    int saved_errno = errno;
     
     //
     // assuming blocking write so that will not return until all done - unless error
@@ -329,11 +373,13 @@ bool socket_write_data(socket_handle_t socket,  void* buffer, int buffer_length,
     }
     else if( res < 0 )
     {
+        socket_throw_error(socket, errno, "write failed r < 0");
         *status = SOCKET_STATUS_ERROR;
         return false;
     }
     else
     {   
+        socket_throw_error(socket, errno, "write failed else");
         *status = SOCKET_STATUS_ERROR;
         return false;
     }
@@ -358,15 +404,18 @@ int socket_read_data( socket_handle_t socket, void* buffer, int buffer_length, i
         
     }else if( howMuch == 0 && (! isError) )
     {
-        printf("%d  read got ZERO %d \n", socket, howMuch);
-        shutdown(socket, SHUT_RD);
+//        socket_throw_error(socket, errno, "read error");
+//        shutdown(socket, SHUT_RD);
         *status = SOCKET_STATUS_EOF;
     }
     else
     {
-        printf("%d read error  %d %s \n", socket, saved_errno, strerror(saved_errno));
-        shutdown(socket, SHUT_RDWR);
-        *status = SOCKET_STATUS_ERROR;
+        socket_throw_error(socket, errno, "read failed");
+//        shutdown(socket, SHUT_RDWR);
+        if( saved_errno == EAGAIN )
+            *status = SOCKET_STATUS_EAGAIN;
+        else
+            *status = SOCKET_STATUS_ERROR;
     }
     return howMuch;
 }

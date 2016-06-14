@@ -22,17 +22,17 @@ INITIALIZE_EASYLOGGINGPP
 
 int main(int argc, const char * argv[])
 {
-
+    
     el::Configurations defaultConf;
     defaultConf.setToDefault();
-//    defaultConf.set(el::Level::Info, el::ConfigurationType::Enabled, "false");
-//    defaultConf.set(el::Level::Debug, el::ConfigurationType::Enabled, "false");
+    //    defaultConf.set(el::Level::Info, el::ConfigurationType::Enabled, "false");
+    defaultConf.set(el::Level::Debug, el::ConfigurationType::Enabled, "false");
     defaultConf.set(el::Level::Global, el::ConfigurationType::Format, "%level|%func[%fbase:%line] : %msg");
     el::Loggers::reconfigureAllLoggers(defaultConf);
     
     try
     {
-        Server server{Protocol::LOOPBACK, 20};
+        Server server{Protocol::BLK_PROXY, 20};
         server.listen(8001);
     }
     catch(Exception e)
