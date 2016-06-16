@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D44AAB461D0CEAFE0055BBD7"
-               BuildableName = "mitm"
-               BlueprintName = "mitm"
-               ReferencedContainer = "container:Pixie-XC.xcodeproj">
+               BuildableName = "blk_mitm"
+               BlueprintName = "blk_mitm"
+               ReferencedContainer = "container:pixie-cpp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D44AAB461D0CEAFE0055BBD7"
-            BuildableName = "mitm"
-            BlueprintName = "mitm"
-            ReferencedContainer = "container:Pixie-XC.xcodeproj">
+            BuildableName = "blk_mitm"
+            BlueprintName = "blk_mitm"
+            ReferencedContainer = "container:pixie-cpp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D44AAB461D0CEAFE0055BBD7"
-            BuildableName = "mitm"
-            BlueprintName = "mitm"
-            ReferencedContainer = "container:Pixie-XC.xcodeproj">
+            BuildableName = "blk_mitm"
+            BlueprintName = "blk_mitm"
+            ReferencedContainer = "container:pixie-cpp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D44AAB461D0CEAFE0055BBD7"
-            BuildableName = "mitm"
-            BlueprintName = "mitm"
-            ReferencedContainer = "container:Pixie-XC.xcodeproj">
+            BuildableName = "blk_mitm"
+            BlueprintName = "blk_mitm"
+            ReferencedContainer = "container:pixie-cpp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

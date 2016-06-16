@@ -14,7 +14,6 @@
 #include <cstdlib>
 #include <pthread.h>
 #include <string>
-#include <easylogging++.h>
 
 class Queue
 {

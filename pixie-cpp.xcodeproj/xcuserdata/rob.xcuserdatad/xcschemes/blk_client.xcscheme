@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D437DE651C2FD7660090E443"
-               BuildableName = "Pixie-XC"
-               BlueprintName = "Pixie-XC"
-               ReferencedContainer = "container:Pixie-XC.xcodeproj">
+               BlueprintIdentifier = "D44BBFBC1D0CB63400E4871C"
+               BuildableName = "blk_client"
+               BlueprintName = "blk_client"
+               ReferencedContainer = "container:pixie-cpp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D437DE651C2FD7660090E443"
-            BuildableName = "Pixie-XC"
-            BlueprintName = "Pixie-XC"
-            ReferencedContainer = "container:Pixie-XC.xcodeproj">
+            BlueprintIdentifier = "D44BBFBC1D0CB63400E4871C"
+            BuildableName = "blk_client"
+            BlueprintName = "blk_client"
+            ReferencedContainer = "container:pixie-cpp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -55,10 +55,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D437DE651C2FD7660090E443"
-            BuildableName = "Pixie-XC"
-            BlueprintName = "Pixie-XC"
-            ReferencedContainer = "container:Pixie-XC.xcodeproj">
+            BlueprintIdentifier = "D44BBFBC1D0CB63400E4871C"
+            BuildableName = "blk_client"
+            BlueprintName = "blk_client"
+            ReferencedContainer = "container:pixie-cpp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -74,10 +74,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D437DE651C2FD7660090E443"
-            BuildableName = "Pixie-XC"
-            BlueprintName = "Pixie-XC"
-            ReferencedContainer = "container:Pixie-XC.xcodeproj">
+            BlueprintIdentifier = "D44BBFBC1D0CB63400E4871C"
+            BuildableName = "blk_client"
+            BlueprintName = "blk_client"
+            ReferencedContainer = "container:pixie-cpp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

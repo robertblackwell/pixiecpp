@@ -36,7 +36,7 @@ void  cb_init(cbuffer_t* cb, size_t buffer_size)
 	cb->was_malloced = false;
 	if( buffer_size != 0){
 		cb->buffer = malloc(buffer_size);
-		cb->buffer_size = buffer_size;		
+		cb->buffer_size = (int)buffer_size;
 	}else{
 		cb->buffer = malloc(CB_BUFFER_SIZE);
 		cb->buffer_size = CB_BUFFER_SIZE;

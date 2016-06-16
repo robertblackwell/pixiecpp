@@ -1,13 +1,6 @@
-//
-//  Client.hpp
-//  Pixie-XC
-//
-//  Created by ROBERT BLACKWELL on 6/8/16.
-//  Copyright © 2016 Blackwellapps. All rights reserved.
-//
 
-#ifndef Client_hpp
-#define Client_hpp
+#ifndef BlkClient_hpp
+#define BlkClient_hpp
 #
 #include <stdio.h>
 #include <string>

@@ -1,10 +1,3 @@
-//
-//  ErrorCodes.h
-//  Pixie-XC
-//
-//  Created by ROBERT BLACKWELL on 6/10/16.
-//  Copyright © 2016 Blackwellapps. All rights reserved.
-//
 
 #ifndef ErrorCodes_h
 #define ErrorCodes_h
@@ -23,6 +16,14 @@
 #define  BLK_WRITE_STATUS_EOF           -2104 //-   got an EOF and no data
 #define  BLK_WRITE_STATUS_IOERROR       -2106 //-   got an io error on the socket
 
+#define  HTTP_READ_STATUS_OK             0
+#define  HTTP_READ_STATUS_EOF            -5004 //-   got an EOF and no data
+#define  HTTP_READ_STATUS_PARSE_ERROR    -5005 //-   the data was not parsed successfully
+#define  HTTP_READ_STATUS_IOERROR        -5006 //-   got an io error on the socket
+
+#define  HTTP_WRITE_STATUS_OK            0
+#define  HTTP_WRITE_STATUS_EOF           -5004 //-   got an EOF and no data
+#define  HTTP_WRITE_STATUS_IOERROR       -5016 //-   got an io error on the socket
 
 
 #endif /* ErrorCodes_h */

@@ -1,5 +1,5 @@
-#ifndef MESSAGE_INC
-#define MESSAGE_INC 1
+#ifndef BLK_MESSAGE_INC
+#define BLK_MESSAGE_INC 1
 #include <vector>
 
 //

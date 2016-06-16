@@ -27,7 +27,7 @@ void ConnectionPool::initialize()
 {
     int status;
     int index = 0;
-    char* host = "localhost";
+    char* host = (char*)"localhost";
     for(int i = 0; i < 10; i ++)
     {
         int sock = socket_connect_host_port(host, 8002, &status);

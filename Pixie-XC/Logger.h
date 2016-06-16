@@ -2,7 +2,7 @@
 
     #define ELPP_THREAD_SAFE 1
 
-    #include <easylogging++.h>
+    #include "easylogging++.h"
 
     #define LOGGER_INC
     #define LOGGER_INIT

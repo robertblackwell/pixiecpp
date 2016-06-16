@@ -34,6 +34,7 @@
 // TODO: better statistics
 // TODO: pass through handler for situations where dont want to parse messages - preparation for SSL
 // TODO: how will SSL fit in
+// TODO : need timeouts on all connect/read/write operations - consider using select for this
 //
 
 Server::Server(Protocol _protocol, unsigned _nbr_workers)
